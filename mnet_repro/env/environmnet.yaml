@@ -1,0 +1,26 @@
+name: mnet-repro
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pytorch
+  - torchvision
+  - pytorch-cuda
+  - numpy
+  - scipy
+  - scikit-image
+  - nibabel
+  - simpleitk
+  - pyyaml
+  - tqdm
+  - cpuonly
+  - jupyterlab
+  - pip
+  - pip:
+      - monai
+      - einops
+      - matplotlib
+      - pandas
