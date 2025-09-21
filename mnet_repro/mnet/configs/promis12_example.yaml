@@ -1,0 +1,25 @@
+experiment_name: "mnet_promis12_debug"
+seed: 42
+
+paths:
+  # You can override these via env vars or CLI flags in train.py
+  data_root: "${DATA_ROOT:/content/data}"
+  output_root: "${OUTPUT_ROOT:/content/outputs}"
+
+data:
+  dataset: "PROMISE12"
+  fold: 0
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+
+train:
+  epochs: 2
+  batch_size: 1
+  lr: 1e-3
+  amp: false
+
+model:
+  name: "MNetTiny"
+  in_channels: 1
+  out_channels: 2

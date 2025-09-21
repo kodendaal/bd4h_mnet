@@ -1,0 +1,34 @@
+experiment_name: "mnet_promise12_baseline"
+seed: 42
+
+paths:
+  data_root: "${DATA_ROOT:/content/data}"
+  output_root: "${OUTPUT_ROOT:/content/outputs}"
+
+data:
+  dataset: "PROMISE12"
+  patch: [16, 128, 128]
+  stride: [8, 64, 64]
+
+train:
+  epochs: 3
+  batch_size: 2
+  lr: 1e-3
+  amp: true
+
+model:
+  name: "MNet"
+  in_channels: 1
+  out_channels: 2
+  base_ch: 32
+  depth: 4
+  deep_supervision: true
+  ds_heads: 3
+
+model:
+  name: "MNetOfficialish"
+  in_channels: 1
+  out_channels: 2
+  kn: [32, 48, 64, 80, 96]
+  ds: true
+  fmu: "sub"   # "sum" | "sub" | "cat"
