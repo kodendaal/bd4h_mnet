@@ -23,11 +23,20 @@ class ExperimentPlanner3D_v21_customTargetSpacing_2x2x2(ExperimentPlanner3D_v21)
         # we change the data identifier and plans_fname. This will make this experiment planner save the preprocessed
         # data in a different folder so that they can co-exist with the default (ExperimentPlanner3D_v21). We also
         # create a custom plans file that will be linked to this data
-        self.data_identifier = "nnUNetData_plans_v2.1_trgSp_2x2x2"
+
+        # nnUNetData_plans_v2.1_trgSp_z1p0_yx0p6125
+        # nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125
+        # nnUNetData_plans_v2.1_trgSp_z4p0_yx0p6125
+
+        self.data_identifier = "nnUNetData_plans_v2.1_trgSp_z4p0_yx0p6125"
         self.plans_fname = join(self.preprocessed_output_folder,
-                                "nnUNetPlansv2.1_trgSp_2x2x2_plans_3D.pkl")
+                                "nnUNetData_plans_v2.1_trgSp_z4p0_yx0p6125_plans_3D.pkl")
 
     def get_target_spacing(self):
         # simply return the desired spacing as np.array
-        return np.array([2., 2., 2.]) # make sure this is float!!!! Not int!
+        # return np.array([2., 2., 2.]) # make sure this is float!!!! Not int!
+        # return np.array([1.0, 0.6125, 0.6125])  # example: z=1.0 mm
+        return np.array([4.0, 0.6125, 0.6125])  # example: z=1.0 mm
+        
+
 
