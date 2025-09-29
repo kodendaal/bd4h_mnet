@@ -47,7 +47,7 @@ class myTrainer(nnUNetTrainer):
                  unpack_data=True, deterministic=True, fp16=False):
         super().__init__(plans_file, fold, output_folder, dataset_directory, batch_dice, stage, unpack_data,
                          deterministic, fp16)
-        self.max_num_epochs = 150 #500 # 150 - 200
+        self.max_num_epochs = 50 #500 # 150 - 200
         self.initial_lr = 1e-2
         self.deep_supervision_scales = None
         self.ds_loss_weights = None
@@ -184,6 +184,9 @@ class myTrainer(nnUNetTrainer):
         #change kn/patch size/batch size to reduce GPU consumption
         self.network = MNet(self.num_input_channels, self.num_classes, kn = (32, 48, 64, 80, 96), ds = True, FMU = 'sub')
 
+        total_params = sum(p.numel() for p in self.network.parameters())
+        trainable_params = sum(p.numel() for p in self.network.parameters() if p.requires_grad)
+        self.print_to_log_file(f"Model params: total={total_params:,}, trainable={trainable_params:,}")
 
         if torch.cuda.is_available():
             self.network.cuda()
