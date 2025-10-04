@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 from nnunet.network_architecture.neural_network import SegmentationNetwork
-from nnunet.network_architecture.reproduction_mnet.basic_module import CB3d, CB3dSeparable, BasicNet
+from nnunet.network_architecture.reproduction_mnet.basic_module import CB3d, CB3dSeparable, BasicNet, CBzMamba, ZScan
 
 # ------------------------
 # Utilities / helpers
@@ -301,27 +301,27 @@ class MNet(SegmentationNetwork):
 
         # Stage 2
         # Axial VMamba in first Down of 2.5D path
-        self.down21 = Down(kn[0], kn[1], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5
-        self.down22 = Down(fct * kn[1], kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
-        self.down23 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
-        self.bottleneck2 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True)
-        self.up21 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4], axial_vmamba=True, axial_reduce=0.5)
-        self.up22 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3], axial_vmamba=True, axial_reduce=0.5)
-        self.up23 = Up(fct * (kn[1] + kn[2]), kn[1], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[1], fuse_ch_up=kn[2], axial_vmamba=True, axial_reduce=0.5)
+        self.down21 = Down(kn[0], kn[1], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.down22 = Down(fct * kn[1], kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.down23 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.bottleneck2 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.up21 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4], axial_vmamba=False, axial_reduce=0.5)
+        self.up22 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3], axial_vmamba=False, axial_reduce=0.5)
+        self.up23 = Up(fct * (kn[1] + kn[2]), kn[1], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[1], fuse_ch_up=kn[2], axial_vmamba=False, axial_reduce=0.5)
 
         # Stage 3
         self.down31 = Down(kn[1], kn[2], ('3d', 'both'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
         self.down32 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck3 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
+        self.bottleneck3 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
         self.up31 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
         self.up32 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3])
 
         # Stage 4
         self.down41 = Down(kn[2], kn[3], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck4 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
+        self.bottleneck4 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
         self.up41 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
 
-        self.bottleneck5 = Down(kn[3], kn[4], ('3d', '3d'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
+        self.bottleneck5 = Down(kn[3], kn[4], ('3d', '3d'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
 
         # Deep supervision heads
         self.outputs = nn.ModuleList(
