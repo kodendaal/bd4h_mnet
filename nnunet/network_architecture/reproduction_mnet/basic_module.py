@@ -1,6 +1,13 @@
 from torch import nn
 import torch
 
+# optional import for Mamba 1D acceleration
+try:
+    # If you have mamba-ssm (or a Vision Mamba 1D), import it here.
+    from mamba_ssm import Mamba as Mamba1D  # example API; change to your impl
+except Exception:
+    Mamba1D = None
+    
 # ------------------------
 # Core blocks (with micro-optimizations)
 # ------------------------
@@ -77,6 +84,64 @@ class CB3dSeparable(nn.Module):
         x = self.pw2(self.a2(self.n2(self.dw2(x))))
         return x
 
+# ------------------------
+# Optional: Mamba 1D variant for 2.5D path (opt-in)
+# ------------------------
+class ZScan(nn.Module):
+    """
+    Z-axis sequence modeling at each (h,w).
+    If Mamba1D is present -> use it; else fall back to separable Conv along Z.
+    Input/Output: (N, C, D, H, W)
+    """
+    def __init__(self, channels: int, k_fallback: int = 5):
+        super().__init__()
+        self.use_mamba = Mamba1D is not None
+        if self.use_mamba:
+            self.block = Mamba1D(d_model=channels)  # adjust args to your Mamba-1D
+        else:
+            # depthwise conv only along Z as a lightweight proxy
+            pad = k_fallback // 2
+            self.block = nn.Conv3d(channels, channels, kernel_size=(k_fallback, 1, 1),
+                                   padding=(pad, 0, 0), groups=channels, bias=False)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        if self.use_mamba:
+            N, C, D, H, W = x.shape
+            x_perm = x.permute(0, 3, 4, 2, 1).contiguous()    # (N,H,W,D,C)
+            seq = x_perm.view(N * H * W, D, C)                # (B*, L=D, C)
+            yseq = self.block(seq)                            # (B*, L, C)
+            y = yseq.view(N, H, W, D, C).permute(0, 4, 3, 1, 2).contiguous()
+            return y
+        else:
+            return self.block(x)
+
+
+class CBzMamba(nn.Module):
+    """
+    Axial-hybrid inter-slice branch: 1x1 reduce -> ZScan(Mamba/conv) -> 1x1 expand (+ norm/act)
+    Drop-in replacement for your CB3d in the '3d' path.
+    """
+    def __init__(self, in_channels, out_channels, reduce_ratio: float = 0.5,
+                 norm_kwargs={'affine': True}, act_kwargs={'negative_slope': 1e-2, 'inplace': True}):
+        super().__init__()
+        mid = max(8, int(in_channels * reduce_ratio))
+        self.pre = nn.Conv3d(in_channels, mid, kernel_size=1, bias=False)
+        self.n1  = nn.InstanceNorm3d(mid, **norm_kwargs)
+        self.a1  = nn.LeakyReLU(**act_kwargs)
+        self.zssm = ZScan(mid)                     # <-- axial Mamba
+        self.post = nn.Conv3d(mid, out_channels, kernel_size=1, bias=False)
+        self.n2  = nn.InstanceNorm3d(out_channels, **norm_kwargs)
+        self.a2  = nn.LeakyReLU(**act_kwargs)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = self.a1(self.n1(self.pre(x)))
+        x = self.zssm(x)
+        x = self.a2(self.n2(self.post(x)))
+        return x
+    
+# ------------------------
+# Base class
+# ------------------------
 
 class BasicNet(nn.Module):
     norm_kwargs = {'affine': True}

@@ -103,7 +103,11 @@ class Down(BasicNet):
     Down block with anisotropy-aware pooling and selectable 3D block type.
     """
     def __init__(self, in_channels, out_channels, mode: tuple, FMU='sub', downsample=True, min_z=8,
-                 use_sep3d: bool = False, use_checkpoint: bool = False, gated_fusion: str = None):
+                 use_sep3d: bool = False, use_checkpoint: bool = False, gated_fusion: str = None,
+                 
+                 # additional args for ZScan via Mamba-1D:
+                 axial_vmamba: bool = False, axial_reduce: float = 0.5,):
+        
         super().__init__()
         self.mode_in, self.mode_out = mode
         self.downsample = downsample
@@ -120,10 +124,15 @@ class Down(BasicNet):
                              norm_args=norm_args, activation_args=activation_args)
 
         if self.mode_out in ('3d', 'both'):
-            Block3D = CB3dSeparable if use_sep3d else CB3d
-            self.CB3d = Block3D(in_channels=in_channels, out_channels=out_channels,
-                                kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
-                                norm_args=norm_args, activation_args=activation_args)
+            if axial_vmamba:
+                self.CB3d = CBzMamba(in_channels=in_channels, out_channels=out_channels,
+                                    reduce_ratio=axial_reduce,
+                                    norm_kwargs=self.norm_kwargs, act_kwargs=self.activation_kwargs)
+            else:
+                Block3D = CB3dSeparable if use_sep3d else CB3d
+                self.CB3d = Block3D(in_channels=in_channels, out_channels=out_channels,
+                                    kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
+                                    norm_args=norm_args, activation_args=activation_args)
 
         if gated_fusion is not None and self.mode_in == 'both': # in ('both', '/'):
             # we fuse AFTER pooling, before convs; fused tensor feeds both heads
@@ -166,7 +175,11 @@ class Up(BasicNet):
     """
     def __init__(self, in_channels, out_channels, mode: tuple, FMU='sub',
                  use_sep3d: bool = False, cat_reduce: bool = False, use_checkpoint: bool = False,
-                 gated_fusion: str = None, fuse_ch: int = None, fuse_ch_up: int = None):
+                 gated_fusion: str = None, fuse_ch: int = None, fuse_ch_up: int = None,
+                 
+                 # additional args for ZScan via Mamba-1D:
+                                  axial_vmamba: bool = False, axial_reduce: float = 0.5):
+        
         super().__init__()
         self.mode_in, self.mode_out = mode
         self.FMU = FMU
@@ -186,10 +199,15 @@ class Up(BasicNet):
                              norm_args=norm_args, activation_args=activation_args)
 
         if self.mode_out in ('3d', 'both'):
-            Block3D = CB3dSeparable if use_sep3d else CB3d
-            self.CB3d = Block3D(in_channels=in_ch_for_cb, out_channels=out_channels,
-                                kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
-                                norm_args=norm_args, activation_args=activation_args)
+            if axial_vmamba:
+                self.CB3d = CBzMamba(in_channels=in_ch_for_cb, out_channels=out_channels,
+                                    reduce_ratio=axial_reduce,
+                                    norm_kwargs=self.norm_kwargs, act_kwargs=self.activation_kwargs)
+            else:
+                Block3D = CB3dSeparable if use_sep3d else CB3d
+                self.CB3d = Block3D(in_channels=in_ch_for_cb, out_channels=out_channels,
+                                    kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
+                                    norm_args=norm_args, activation_args=activation_args)
 
         if gated_fusion is not None:
             assert fuse_ch is not None, "Up needs fuse_ch (= per-stream channels at this level)"
@@ -282,13 +300,14 @@ class MNet(SegmentationNetwork):
         self.up14 = Up(fct * (kn[0] + kn[1]), kn[0], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[0], fuse_ch_up=kn[1])
 
         # Stage 2
-        self.down21 = Down(kn[0], kn[1], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.down22 = Down(fct * kn[1], kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.down23 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck2 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.up21 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
-        self.up22 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3])
-        self.up23 = Up(fct * (kn[1] + kn[2]), kn[1], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[1], fuse_ch_up=kn[2])
+        # Axial VMamba in first Down of 2.5D path
+        self.down21 = Down(kn[0], kn[1], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5
+        self.down22 = Down(fct * kn[1], kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
+        self.down23 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
+        self.bottleneck2 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True)
+        self.up21 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4], axial_vmamba=True, axial_reduce=0.5)
+        self.up22 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3], axial_vmamba=True, axial_reduce=0.5)
+        self.up23 = Up(fct * (kn[1] + kn[2]), kn[1], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[1], fuse_ch_up=kn[2], axial_vmamba=True, axial_reduce=0.5)
 
         # Stage 3
         self.down31 = Down(kn[1], kn[2], ('3d', 'both'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
