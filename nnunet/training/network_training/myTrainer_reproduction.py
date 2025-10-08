@@ -120,7 +120,9 @@ class myTrainer_reproduction(nnUNetTrainer):
             use_sep3d=self.use_sep3d,
             use_checkpoint=self.use_checkpoint,
             cat_reduce=self.cat_reduce,
-            gated_fusion="spatial" # 'channel' | 'spatial' | 'dual' | 'None'
+            gated_fusion=None, # 'channel' | 'spatial' | 'dual' | 'None'
+            axial_vmamba=True, 
+            axial_reduce=0.5
         )
         if torch.cuda.is_available():
             self.network.cuda()

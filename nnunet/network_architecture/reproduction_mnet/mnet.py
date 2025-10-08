@@ -270,7 +270,7 @@ class MNet(SegmentationNetwork):
 
     def __init__(self, in_channels, num_classes, kn=(32, 48, 64, 80, 96), ds=True, FMU='sub',
                  width_mult: float = 1.0, use_sep3d: bool = False, use_checkpoint: bool = False, 
-                 cat_reduce: bool = False, gated_fusion: str = None):
+                 cat_reduce: bool = False, gated_fusion: str = None, axial_vmamba=False, axial_reduce=0.5):
         """
         Efficiency knobs (all default off):
           - width_mult: scales channel counts uniformly
@@ -312,16 +312,16 @@ class MNet(SegmentationNetwork):
         # Stage 3
         self.down31 = Down(kn[1], kn[2], ('3d', 'both'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
         self.down32 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck3 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
+        self.bottleneck3 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=axial_vmamba, axial_reduce=axial_reduce)
         self.up31 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
         self.up32 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3])
 
         # Stage 4
         self.down41 = Down(kn[2], kn[3], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck4 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
+        self.bottleneck4 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=axial_vmamba, axial_reduce=axial_reduce)
         self.up41 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
 
-        self.bottleneck5 = Down(kn[3], kn[4], ('3d', '3d'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=True, axial_reduce=0.5)
+        self.bottleneck5 = Down(kn[3], kn[4], ('3d', '3d'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=axial_vmamba, axial_reduce=axial_reduce)
 
         # Deep supervision heads
         self.outputs = nn.ModuleList(
