@@ -133,13 +133,13 @@ Then plan & preprocess for each spacing:
 
 ```bash
 # z = 1.0
-nnUNet_plan_and_preprocess -t 24 -planner3d ExperimentPlanner3D_v21_trgSp_z1p0_yx0p6125 --verify_dataset_integrity 
+nnUNet_plan_and_preprocess -t 24 -pl3d ExperimentPlanner3D_v21_trgSp_z1p0_yx0p6125 --verify_dataset_integrity 
 
 # z = 2.2
-nnUNet_plan_and_preprocess -t 24 -planner3d ExperimentPlanner3D_v21_trgSp_z2p2_yx0p6125 --verify_dataset_integrity
+nnUNet_plan_and_preprocess -t 24 -pl3d ExperimentPlanner3D_v21_trgSp_z2p2_yx0p6125 --verify_dataset_integrity
 
 # z = 4.0
-nnUNet_plan_and_preprocess -t 24 -planner3d ExperimentPlanner3D_v21_trgSp_z4p0_yx0p6125 --verify_dataset_integrity
+nnUNet_plan_and_preprocess -t 24 -pl3d ExperimentPlanner3D_v21_trgSp_z4p0_yx0p6125 --verify_dataset_integrity
 ```
 
 After each run, check you have a **`*_plans_3D.pkl`** file per variant in:
