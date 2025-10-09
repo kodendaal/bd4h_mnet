@@ -175,11 +175,11 @@ nnUNet_train 3d_fullres myTrainer_reproduction Task024_Promise 0 \
 ### 5.2 Loop over multiple spacings (fold 0)
 
 ```bash
-zs=("1.0" "2.2" "4.0")
+zs=("1p0" "2p2" "4p0")
 folds=(0)
 
 for z in "${zs[@]}"; do
-  plan="nnUNetPlansv2.1_trgSp_z${z}_yx0.6125"   # exact base name of your *_plans_3D.pkl
+  plan="nnUNetData_plans_v2.1_trgSp_z${z}_yx0p6125"   # exact base name of your *_plans_3D.pkl
   for f in "${folds[@]}"; do
     echo "== Training $plan fold $f =="
     nnUNet_train 3d_fullres myTrainer_reproduction Task024_Promise "$f" \
