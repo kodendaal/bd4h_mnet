@@ -28,15 +28,15 @@ class ExperimentPlanner3D_v21_customTargetSpacing_2x2x2(ExperimentPlanner3D_v21)
         # nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125
         # nnUNetData_plans_v2.1_trgSp_z4p0_yx0p6125
 
-        self.data_identifier = "nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125"
+        self.data_identifier = "nnUNetData_plans_v2.1_trgSp_z1p0_yx0p9121"
         self.plans_fname = join(self.preprocessed_output_folder,
-                                "nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125_plans_3D.pkl")
+                                "nnUNetData_plans_v2.1_trgSp_z1p0_yx0p9121_plans_3D.pkl")
 
     def get_target_spacing(self):
         # simply return the desired spacing as np.array
         # return np.array([2., 2., 2.]) # make sure this is float!!!! Not int!
         # return np.array([1.0, 0.6125, 0.6125])  # example: z=1.0 mm
-        return np.array([2.2, 0.6125, 0.6125])  # example: z=1.0 mm
+        return np.array([1.0, 0.9121, 0.9121])  # example: z=1.0 mm
         
 
 

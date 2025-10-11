@@ -52,11 +52,11 @@ def export_segmentations_postprocess(indir, outdir):
 
 
 if __name__ == "__main__":
-    train_dir = "/media/fabian/DeepLearningData/tmp/LITS-Challenge-Train-Data"
-    test_dir = "/media/fabian/My Book/datasets/LiTS/test_data"
+    train_dir = "/teamspace/studios/this_studio/nnUNet/data/lits/train"
+    test_dir = "/teamspace/studios/this_studio/nnUNet/data/lits/test"
 
 
-    output_folder = "/media/fabian/My Book/MedicalDecathlon/MedicalDecathlon_raw_splitted/Task029_LITS"
+    output_folder = "/teamspace/studios/this_studio/nnUNet_raw/nnUNet_raw_data/Task029_LITS" 
     img_dir = join(output_folder, "imagesTr")
     lab_dir = join(output_folder, "labelsTr")
     img_dir_te = join(output_folder, "imagesTs")
@@ -89,7 +89,7 @@ if __name__ == "__main__":
     nii_files_tr_data = subfiles(train_dir, True, "volume", "nii", True)
     nii_files_tr_seg = subfiles(train_dir, True, "segmen", "nii", True)
 
-    nii_files_ts = subfiles(test_dir, True, "test-volume", "nii", True)
+    nii_files_ts = subfiles(test_dir, True, "volume", "nii", True)
 
     p = Pool(default_num_threads)
     train_ids = p.map(load_save_train, zip(nii_files_tr_data, nii_files_tr_seg))
