@@ -1,0 +1,219 @@
+{
+    "author": "Fabian",
+    "description": "",
+    "id": "78bf868cd836",
+    "name": "",
+    "results": {
+        "all": [
+            {
+                "1": {
+                    "Accuracy": 0.9971464441177693,
+                    "Dice": 0.9369241036828659,
+                    "False Discovery Rate": 0.06952288981459376,
+                    "False Negative Rate": 0.05653894097880874,
+                    "False Omission Rate": 0.0012996525539028156,
+                    "False Positive Rate": 0.0016198933195217258,
+                    "Jaccard": 0.8813332208252468,
+                    "Negative Predictive Value": 0.9987003474460971,
+                    "Precision": 0.9304771101854062,
+                    "Recall": 0.9434610590211913,
+                    "Total Positives Reference": 276765,
+                    "Total Positives Test": 280627,
+                    "True Negative Rate": 0.9983801066804783
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case00.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case00.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9958302871040676,
+                    "Dice": 0.8724974832193492,
+                    "False Discovery Rate": 0.050144104948155355,
+                    "False Negative Rate": 0.19320936994395854,
+                    "False Omission Rate": 0.003468657477419923,
+                    "False Positive Rate": 0.0007667118403624773,
+                    "Jaccard": 0.7738319606687748,
+                    "Negative Predictive Value": 0.9965313425225801,
+                    "Precision": 0.9498558950518446,
+                    "Recall": 0.8067906300560415,
+                    "Total Positives Reference": 213235,
+                    "Total Positives Test": 181118,
+                    "True Negative Rate": 0.9992332881596375
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case04.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case04.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9880532657398897,
+                    "Dice": 0.5990178800066278,
+                    "False Discovery Rate": 0.004343961642943928,
+                    "False Negative Rate": 0.5716309306446488,
+                    "False Omission Rate": 0.01201548961481442,
+                    "False Positive Rate": 3.976061588395474e-05,
+                    "Jaccard": 0.4275699678518821,
+                    "Negative Predictive Value": 0.9879845103851855,
+                    "Precision": 0.9956560383570561,
+                    "Recall": 0.42836906935535124,
+                    "Total Positives Reference": 185667,
+                    "Total Positives Test": 79881,
+                    "True Negative Rate": 0.999960239384116
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case07.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case07.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.996978515625,
+                    "Dice": 0.9029576890505913,
+                    "False Discovery Rate": 0.15801941974730926,
+                    "False Negative Rate": 0.02654358558193004,
+                    "False Omission Rate": 0.0003898087603187593,
+                    "False Positive Rate": 0.002676838288844907,
+                    "Jaccard": 0.8230837407439174,
+                    "Negative Predictive Value": 0.9996101912396812,
+                    "Precision": 0.8419805802526907,
+                    "Recall": 0.97345641441807,
+                    "Total Positives Reference": 29574,
+                    "Total Positives Test": 34192,
+                    "True Negative Rate": 0.9973231617111551
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case15.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case15.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9850234375,
+                    "Dice": 0.927730601396756,
+                    "False Discovery Rate": 0.01630907292114281,
+                    "False Negative Rate": 0.12220547713106056,
+                    "False Omission Rate": 0.014832244329404838,
+                    "False Positive Rate": 0.0017897464635509008,
+                    "Jaccard": 0.8652029075950813,
+                    "Negative Predictive Value": 0.9851677556705951,
+                    "Precision": 0.9836909270788572,
+                    "Recall": 0.8777945228689394,
+                    "Total Positives Reference": 224278,
+                    "Total Positives Test": 200134,
+                    "True Negative Rate": 0.9982102535364491
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case23.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case23.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.997998046875,
+                    "Dice": 0.9139523169912693,
+                    "False Discovery Rate": 0.1097391446561452,
+                    "False Negative Rate": 0.061060802069857645,
+                    "False Omission Rate": 0.0006997630886831111,
+                    "False Positive Rate": 0.0013255564719653057,
+                    "Jaccard": 0.8415397696529334,
+                    "Negative Predictive Value": 0.9993002369113169,
+                    "Precision": 0.8902608553438548,
+                    "Recall": 0.9389391979301424,
+                    "Total Positives Reference": 23190,
+                    "Total Positives Test": 24458,
+                    "True Negative Rate": 0.9986744435280347
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case24.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case24.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9971354940663213,
+                    "Dice": 0.9189752154515216,
+                    "False Discovery Rate": 0.030718378576306105,
+                    "False Negative Rate": 0.12636696102042633,
+                    "False Omission Rate": 0.0023897379756134384,
+                    "False Positive Rate": 0.0005245722556032062,
+                    "Jaccard": 0.8500963424583818,
+                    "Negative Predictive Value": 0.9976102620243865,
+                    "Precision": 0.9692816214236939,
+                    "Recall": 0.8736330389795737,
+                    "Total Positives Reference": 112110,
+                    "Total Positives Test": 101047,
+                    "True Negative Rate": 0.9994754277443968
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case26.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case26.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9976315705672555,
+                    "Dice": 0.9052094949816791,
+                    "False Discovery Rate": 0.06443468715697032,
+                    "False Negative Rate": 0.12323834996399552,
+                    "False Omission Rate": 0.0016090169416858953,
+                    "False Positive Rate": 0.0007890389451880031,
+                    "Jaccard": 0.8268335273573924,
+                    "Negative Predictive Value": 0.9983909830583141,
+                    "Precision": 0.9355653128430297,
+                    "Recall": 0.8767616500360045,
+                    "Total Positives Reference": 19442,
+                    "Total Positives Test": 18220,
+                    "True Negative Rate": 0.999210961054812
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case35.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case35.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9973726399739583,
+                    "Dice": 0.8652911355433626,
+                    "False Discovery Rate": 0.08080315588848008,
+                    "False Negative Rate": 0.18264228283146777,
+                    "False Omission Rate": 0.0019030496020802953,
+                    "False Positive Rate": 0.0007495185484255318,
+                    "Jaccard": 0.762566648280934,
+                    "Negative Predictive Value": 0.9980969503979197,
+                    "Precision": 0.9191968441115199,
+                    "Recall": 0.8173577171685322,
+                    "Total Positives Reference": 25372,
+                    "Total Positives Test": 22561,
+                    "True Negative Rate": 0.9992504814515745
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case40.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case40.nii.gz"
+            },
+            {
+                "1": {
+                    "Accuracy": 0.9979252115885416,
+                    "Dice": 0.8953858148170944,
+                    "False Discovery Rate": 0.03348540550117374,
+                    "False Negative Rate": 0.1659914386179483,
+                    "False Omission Rate": 0.001783556048546564,
+                    "False Positive Rate": 0.0003109273696696446,
+                    "Jaccard": 0.8105869242199109,
+                    "Negative Predictive Value": 0.9982164439514535,
+                    "Precision": 0.9665145944988263,
+                    "Recall": 0.8340085613820517,
+                    "Total Positives Reference": 26164,
+                    "Total Positives Test": 22577,
+                    "True Negative Rate": 0.9996890726303304
+                },
+                "reference": "/teamspace/studios/this_studio/nnUNet_preprocessed/Task024_Promise/gt_segmentations/Case44.nii.gz",
+                "test": "/teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task024_Promise/myTrainer_reproduction__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p6125/fold_2/validation_raw_postprocessed/Case44.nii.gz"
+            }
+        ],
+        "mean": {
+            "1": {
+                "Accuracy": 0.9951094913157803,
+                "Dice": 0.8737941735141117,
+                "False Discovery Rate": 0.06175202208532206,
+                "False Negative Rate": 0.16294281387841023,
+                "False Omission Rate": 0.004039097639247005,
+                "False Positive Rate": 0.0010592564119015658,
+                "Jaccard": 0.7862645009654455,
+                "Negative Predictive Value": 0.9959609023607529,
+                "Precision": 0.9382479779146781,
+                "Recall": 0.8370571861215896,
+                "Total Positives Reference": 113579.7,
+                "Total Positives Test": 96481.5,
+                "True Negative Rate": 0.9989407435880983
+            }
+        }
+    },
+    "task": "",
+    "timestamp": "2025-10-02 01:10:19.906571"
+}
