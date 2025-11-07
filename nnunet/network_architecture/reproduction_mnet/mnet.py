@@ -9,6 +9,8 @@ from nnunet.network_architecture.reproduction_mnet.basic_module import CB3d, CB3
 # Utilities / helpers
 # ------------------------
 
+#######################################################
+# ADDED VIA PROJECT
 # ----- Gated fusion modules -----
 def _gap(x: torch.Tensor) -> torch.Tensor:
     return x.mean(dim=(2, 3, 4), keepdim=True)  # (N,C,1,1,1)
@@ -20,7 +22,7 @@ class ChannelGate(nn.Module):
         self.fc1 = nn.Conv3d(2 * channels, h, kernel_size=1, bias=True)
         self.act = nn.ReLU(inplace=True)
         self.fc2 = nn.Conv3d(h, channels, kernel_size=1, bias=True)
-        nn.init.zeros_(self.fc2.bias)  # sigmoid(0)=0.5 -> neutral start
+        nn.init.zeros_(self.fc2.bias)  # sigmoid(0)=0.5 - neutral start
 
     def forward(self, x2d: torch.Tensor, x3d: torch.Tensor) -> torch.Tensor:
         z = torch.cat([_gap(x2d), _gap(x3d)], dim=1)  # (N,2C,1,1,1)
@@ -67,16 +69,6 @@ class GatedFMU(nn.Module):
             y = y + self.residual_blend * 0.5 * (x2d + x3d)
         return y
 
-def FMU(x1: torch.Tensor, x2: torch.Tensor, mode: str = 'sub') -> torch.Tensor:
-    if mode == 'sum':
-        return torch.add(x1, x2)
-    elif mode == 'sub':
-        return torch.abs(x1 - x2)
-    elif mode == 'cat':
-        return torch.cat((x1, x2), dim=1)
-    else:
-        raise ValueError(f'Unexpected FMU mode: {mode}')
-
 class Bottleneck1x1(nn.Module):
     """Cheap channel reducer used when FMU='cat' (doubles channels)."""
     def __init__(self, in_ch: int, out_ch: int):
@@ -93,11 +85,29 @@ def ckpt_if(module: nn.Module, x: torch.Tensor, use_ckpt: bool, training: bool):
         def fn(t): return module(t)
         return checkpoint(fn, x)
     return module(x)
+#############################################################
+
+
+def FMU(x1: torch.Tensor, x2: torch.Tensor, mode: str = 'sub') -> torch.Tensor:
+    if mode == 'sum':
+        return torch.add(x1, x2)
+    elif mode == 'sub':
+        return torch.abs(x1 - x2)
+    elif mode == 'cat':
+        return torch.cat((x1, x2), dim=1)
+    else:
+        raise ValueError(f'Unexpected FMU mode: {mode}')
+
 
 # ------------------------
 # Core blocks
 # ------------------------
 
+
+#################################################################
+# DOWN AND UP BLOCKS WERE USED FROM REPO AS REFERENCE TO ENSURE
+# APPROPRIATE PATHWAYS. IMPROVEMENTS WERE MADE TO ENSURE COMPATIBILITY 
+# WITH FUSION GATING AND VMAMBA BLOCKS
 class Down(BasicNet):
     """
     Down block with anisotropy-aware pooling and selectable 3D block type.
@@ -250,6 +260,11 @@ class Up(BasicNet):
                     ckpt_if(self.CB3d, cat, self.use_checkpoint, self.training))
 
 
+
+#############################################################
+# SELF SCRIPTED WITH GUIDANCE FROM REPOSITORY AND REPO TO ENSURE
+# APPROPRIATE COMPATIBILITY WITH NNUNET INFRASTRUCTURE AND ORIGINAL 
+# PAPER IMPLEMENTATION
 class MNet(SegmentationNetwork):
     # nnU-Net bookkeeping
     DEFAULT_BATCH_SIZE_3D = 2
@@ -268,6 +283,9 @@ class MNet(SegmentationNetwork):
     use_this_for_batch_size_computation_2D = 19739648
     use_this_for_batch_size_computation_3D = 520000000
 
+
+    #################################################
+    # SELF-SCRIPTED WITH GUIDANCE - INCLUDES IMPROVEMENTS AND INNOVATIONS
     def __init__(self, in_channels, num_classes, kn=(32, 48, 64, 80, 96), ds=True, FMU='sub',
                  width_mult: float = 1.0, use_sep3d: bool = False, use_checkpoint: bool = False, 
                  cat_reduce: bool = False, gated_fusion: str = None, axial_vmamba=False, axial_reduce=0.5):
@@ -357,18 +375,21 @@ class MNet(SegmentationNetwork):
         # 4
         down41 = self.down41(down31[1])
         bottleNeck4 = self.bottleneck4([down41[0], down32[1]])
-
         bottleNeck5 = self.bottleneck5(down41[1])
-
+        
+        # reverse 4 (upsampling)
         up41 = self.up41([bottleNeck4[0], down41[0], bottleNeck5, down41[1]])
-
+        
+        # reverse 3 (upsampling)
         up31 = self.up31([bottleNeck3[0], down32[0], bottleNeck4[1], down32[1]])
         up32 = self.up32([up31[0], down31[0], up41, down31[1]])
-
+        
+        # reverse 2 (upsample)
         up21 = self.up21([bottleNeck2[0], down23[0], bottleNeck3[1], down23[1]])
         up22 = self.up22([up21[0], down22[0], up31[1], down22[1]])
         up23 = self.up23([up22[0], down21[0], up32, down21[1]])
-
+        
+        # reverse 1 (upsampling)
         up11 = self.up11([bottleNeck1, down14[0], bottleNeck2[1], down14[1]])
         up12 = self.up12([up11, down13[0], up21[1], down13[1]])
         up13 = self.up13([up12, down12[0], up22[1], down12[1]])

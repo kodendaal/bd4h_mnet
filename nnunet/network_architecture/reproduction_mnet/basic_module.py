@@ -1,15 +1,18 @@
 from torch import nn
 import torch
 
-# optional import for Mamba 1D acceleration
+################################################################
+# ADDED FROM OWN IMPLEMENTATION TO RUN VMAMBA IN BOTTLENECKS
+# import for Mamba 1D acceleration
 try:
     # If you have mamba-ssm (or a Vision Mamba 1D), import it here.
     from mamba_ssm import Mamba as Mamba1D  # example API; change to your impl
 except Exception:
     Mamba1D = None
-    
+###############################################################
+
 # ------------------------
-# Core blocks (with micro-optimizations)
+# Core blocks (Reused from Repo but with micro-optimizations)
 # ------------------------
 
 class CNA3d(nn.Module):
@@ -53,11 +56,11 @@ class CB3d(nn.Module):
         x = self.conv2(x)
         return x
 
-
+#############################################################
+# ADDED NEW FUNCTION CLASSES FOR IMPROVEMENTS AND INNOVATIONS
 # ------------------------
-# Optional: Depthwise-separable variant for 3D path (opt-in)
+# Depthwise-separable variant for 3D path (opt-in)
 # ------------------------
-
 class CB3dSeparable(nn.Module):
     """
     Depthwise (groups=channels) 3D + pointwise 1x1x1, twice.
@@ -85,7 +88,7 @@ class CB3dSeparable(nn.Module):
         return x
 
 # ------------------------
-# Optional: Mamba 1D variant for 2.5D path (opt-in)
+# Mamba 1D variant for 2.5D path (opt-in)
 # ------------------------
 class ZScan(nn.Module):
     """
@@ -139,8 +142,10 @@ class CBzMamba(nn.Module):
         x = self.a2(self.n2(self.post(x)))
         return x
     
+###############################################################
+
 # ------------------------
-# Base class
+# Base class (reused from Repo)
 # ------------------------
 
 class BasicNet(nn.Module):
