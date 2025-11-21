@@ -3,12 +3,14 @@ import torch
 import torch.nn.functional as F
 from torch.utils.checkpoint import checkpoint
 from nnunet.network_architecture.neural_network import SegmentationNetwork
-from nnunet.network_architecture.reproduction_mnet.basic_module import CB3d, CB3dSeparable, BasicNet
+from nnunet.network_architecture.reproduction_mnet.basic_module import CB3d, CB3dSeparable, BasicNet, CBzMamba, ZScan
 
 # ------------------------
 # Utilities / helpers
 # ------------------------
 
+#######################################################
+# ADDED VIA PROJECT
 # ----- Gated fusion modules -----
 def _gap(x: torch.Tensor) -> torch.Tensor:
     return x.mean(dim=(2, 3, 4), keepdim=True)  # (N,C,1,1,1)
@@ -20,7 +22,7 @@ class ChannelGate(nn.Module):
         self.fc1 = nn.Conv3d(2 * channels, h, kernel_size=1, bias=True)
         self.act = nn.ReLU(inplace=True)
         self.fc2 = nn.Conv3d(h, channels, kernel_size=1, bias=True)
-        nn.init.zeros_(self.fc2.bias)  # sigmoid(0)=0.5 -> neutral start
+        nn.init.zeros_(self.fc2.bias)  # sigmoid(0)=0.5 - neutral start
 
     def forward(self, x2d: torch.Tensor, x3d: torch.Tensor) -> torch.Tensor:
         z = torch.cat([_gap(x2d), _gap(x3d)], dim=1)  # (N,2C,1,1,1)
@@ -67,16 +69,6 @@ class GatedFMU(nn.Module):
             y = y + self.residual_blend * 0.5 * (x2d + x3d)
         return y
 
-def FMU(x1: torch.Tensor, x2: torch.Tensor, mode: str = 'sub') -> torch.Tensor:
-    if mode == 'sum':
-        return torch.add(x1, x2)
-    elif mode == 'sub':
-        return torch.abs(x1 - x2)
-    elif mode == 'cat':
-        return torch.cat((x1, x2), dim=1)
-    else:
-        raise ValueError(f'Unexpected FMU mode: {mode}')
-
 class Bottleneck1x1(nn.Module):
     """Cheap channel reducer used when FMU='cat' (doubles channels)."""
     def __init__(self, in_ch: int, out_ch: int):
@@ -93,17 +85,39 @@ def ckpt_if(module: nn.Module, x: torch.Tensor, use_ckpt: bool, training: bool):
         def fn(t): return module(t)
         return checkpoint(fn, x)
     return module(x)
+#############################################################
+
+
+def FMU(x1: torch.Tensor, x2: torch.Tensor, mode: str = 'sub') -> torch.Tensor:
+    if mode == 'sum':
+        return torch.add(x1, x2)
+    elif mode == 'sub':
+        return torch.abs(x1 - x2)
+    elif mode == 'cat':
+        return torch.cat((x1, x2), dim=1)
+    else:
+        raise ValueError(f'Unexpected FMU mode: {mode}')
+
 
 # ------------------------
 # Core blocks
 # ------------------------
 
+
+#################################################################
+# DOWN AND UP BLOCKS WERE USED FROM REPO AS REFERENCE TO ENSURE
+# APPROPRIATE PATHWAYS. IMPROVEMENTS WERE MADE TO ENSURE COMPATIBILITY 
+# WITH FUSION GATING AND VMAMBA BLOCKS
 class Down(BasicNet):
     """
     Down block with anisotropy-aware pooling and selectable 3D block type.
     """
     def __init__(self, in_channels, out_channels, mode: tuple, FMU='sub', downsample=True, min_z=8,
-                 use_sep3d: bool = False, use_checkpoint: bool = False, gated_fusion: str = None):
+                 use_sep3d: bool = False, use_checkpoint: bool = False, gated_fusion: str = None,
+                 
+                 # additional args for ZScan via Mamba-1D:
+                 axial_vmamba: bool = False, axial_reduce: float = 0.5,):
+        
         super().__init__()
         self.mode_in, self.mode_out = mode
         self.downsample = downsample
@@ -120,10 +134,15 @@ class Down(BasicNet):
                              norm_args=norm_args, activation_args=activation_args)
 
         if self.mode_out in ('3d', 'both'):
-            Block3D = CB3dSeparable if use_sep3d else CB3d
-            self.CB3d = Block3D(in_channels=in_channels, out_channels=out_channels,
-                                kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
-                                norm_args=norm_args, activation_args=activation_args)
+            if axial_vmamba:
+                self.CB3d = CBzMamba(in_channels=in_channels, out_channels=out_channels,
+                                    reduce_ratio=axial_reduce,
+                                    norm_kwargs=self.norm_kwargs, act_kwargs=self.activation_kwargs)
+            else:
+                Block3D = CB3dSeparable if use_sep3d else CB3d
+                self.CB3d = Block3D(in_channels=in_channels, out_channels=out_channels,
+                                    kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
+                                    norm_args=norm_args, activation_args=activation_args)
 
         if gated_fusion is not None and self.mode_in == 'both': # in ('both', '/'):
             # we fuse AFTER pooling, before convs; fused tensor feeds both heads
@@ -166,7 +185,11 @@ class Up(BasicNet):
     """
     def __init__(self, in_channels, out_channels, mode: tuple, FMU='sub',
                  use_sep3d: bool = False, cat_reduce: bool = False, use_checkpoint: bool = False,
-                 gated_fusion: str = None, fuse_ch: int = None, fuse_ch_up: int = None):
+                 gated_fusion: str = None, fuse_ch: int = None, fuse_ch_up: int = None,
+                 
+                 # additional args for ZScan via Mamba-1D:
+                                  axial_vmamba: bool = False, axial_reduce: float = 0.5):
+        
         super().__init__()
         self.mode_in, self.mode_out = mode
         self.FMU = FMU
@@ -186,10 +209,15 @@ class Up(BasicNet):
                              norm_args=norm_args, activation_args=activation_args)
 
         if self.mode_out in ('3d', 'both'):
-            Block3D = CB3dSeparable if use_sep3d else CB3d
-            self.CB3d = Block3D(in_channels=in_ch_for_cb, out_channels=out_channels,
-                                kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
-                                norm_args=norm_args, activation_args=activation_args)
+            if axial_vmamba:
+                self.CB3d = CBzMamba(in_channels=in_ch_for_cb, out_channels=out_channels,
+                                    reduce_ratio=axial_reduce,
+                                    norm_kwargs=self.norm_kwargs, act_kwargs=self.activation_kwargs)
+            else:
+                Block3D = CB3dSeparable if use_sep3d else CB3d
+                self.CB3d = Block3D(in_channels=in_ch_for_cb, out_channels=out_channels,
+                                    kSize=(3, 3), stride=(1, 1), padding=(1, 1, 1),
+                                    norm_args=norm_args, activation_args=activation_args)
 
         if gated_fusion is not None:
             assert fuse_ch is not None, "Up needs fuse_ch (= per-stream channels at this level)"
@@ -232,6 +260,11 @@ class Up(BasicNet):
                     ckpt_if(self.CB3d, cat, self.use_checkpoint, self.training))
 
 
+
+#############################################################
+# SELF SCRIPTED WITH GUIDANCE FROM REPOSITORY AND REPO TO ENSURE
+# APPROPRIATE COMPATIBILITY WITH NNUNET INFRASTRUCTURE AND ORIGINAL 
+# PAPER IMPLEMENTATION
 class MNet(SegmentationNetwork):
     # nnU-Net bookkeeping
     DEFAULT_BATCH_SIZE_3D = 2
@@ -250,9 +283,12 @@ class MNet(SegmentationNetwork):
     use_this_for_batch_size_computation_2D = 19739648
     use_this_for_batch_size_computation_3D = 520000000
 
+
+    #################################################
+    # SELF-SCRIPTED WITH GUIDANCE - INCLUDES IMPROVEMENTS AND INNOVATIONS
     def __init__(self, in_channels, num_classes, kn=(32, 48, 64, 80, 96), ds=True, FMU='sub',
                  width_mult: float = 1.0, use_sep3d: bool = False, use_checkpoint: bool = False, 
-                 cat_reduce: bool = False, gated_fusion: str = None):
+                 cat_reduce: bool = False, gated_fusion: str = None, axial_vmamba=False, axial_reduce=0.5):
         """
         Efficiency knobs (all default off):
           - width_mult: scales channel counts uniformly
@@ -282,27 +318,28 @@ class MNet(SegmentationNetwork):
         self.up14 = Up(fct * (kn[0] + kn[1]), kn[0], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[0], fuse_ch_up=kn[1])
 
         # Stage 2
-        self.down21 = Down(kn[0], kn[1], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.down22 = Down(fct * kn[1], kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.down23 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck2 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.up21 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
-        self.up22 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3])
-        self.up23 = Up(fct * (kn[1] + kn[2]), kn[1], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[1], fuse_ch_up=kn[2])
+        # Axial VMamba in first Down of 2.5D path
+        self.down21 = Down(kn[0], kn[1], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.down22 = Down(fct * kn[1], kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.down23 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.bottleneck2 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=False, axial_reduce=0.5)
+        self.up21 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4], axial_vmamba=False, axial_reduce=0.5)
+        self.up22 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3], axial_vmamba=False, axial_reduce=0.5)
+        self.up23 = Up(fct * (kn[1] + kn[2]), kn[1], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[1], fuse_ch_up=kn[2], axial_vmamba=False, axial_reduce=0.5)
 
         # Stage 3
         self.down31 = Down(kn[1], kn[2], ('3d', 'both'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
         self.down32 = Down(fct * kn[2], kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck3 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
+        self.bottleneck3 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=axial_vmamba, axial_reduce=axial_reduce)
         self.up31 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', 'both'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
         self.up32 = Up(fct * (kn[2] + kn[3]), kn[2], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[2], fuse_ch_up=kn[3])
 
         # Stage 4
         self.down41 = Down(kn[2], kn[3], ('3d', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
-        self.bottleneck4 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
+        self.bottleneck4 = Down(fct * kn[3], kn[4], ('both', 'both'), FMU, use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=axial_vmamba, axial_reduce=axial_reduce)
         self.up41 = Up(fct * (kn[3] + kn[4]), kn[3], ('both', '3d'), FMU, use_sep3d=use_sep3d, cat_reduce=cat_reduce, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, fuse_ch=kn[3], fuse_ch_up=kn[4])
 
-        self.bottleneck5 = Down(kn[3], kn[4], ('3d', '3d'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion)
+        self.bottleneck5 = Down(kn[3], kn[4], ('3d', '3d'), use_sep3d=use_sep3d, use_checkpoint=use_checkpoint, gated_fusion=gated_fusion, axial_vmamba=axial_vmamba, axial_reduce=axial_reduce)
 
         # Deep supervision heads
         self.outputs = nn.ModuleList(
@@ -338,18 +375,21 @@ class MNet(SegmentationNetwork):
         # 4
         down41 = self.down41(down31[1])
         bottleNeck4 = self.bottleneck4([down41[0], down32[1]])
-
         bottleNeck5 = self.bottleneck5(down41[1])
-
+        
+        # reverse 4 (upsampling)
         up41 = self.up41([bottleNeck4[0], down41[0], bottleNeck5, down41[1]])
-
+        
+        # reverse 3 (upsampling)
         up31 = self.up31([bottleNeck3[0], down32[0], bottleNeck4[1], down32[1]])
         up32 = self.up32([up31[0], down31[0], up41, down31[1]])
-
+        
+        # reverse 2 (upsample)
         up21 = self.up21([bottleNeck2[0], down23[0], bottleNeck3[1], down23[1]])
         up22 = self.up22([up21[0], down22[0], up31[1], down22[1]])
         up23 = self.up23([up22[0], down21[0], up32, down21[1]])
-
+        
+        # reverse 1 (upsampling)
         up11 = self.up11([bottleNeck1, down14[0], bottleNeck2[1], down14[1]])
         up12 = self.up12([up11, down13[0], up21[1], down13[1]])
         up13 = self.up13([up12, down12[0], up22[1], down12[1]])

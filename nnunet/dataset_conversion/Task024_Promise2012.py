@@ -32,7 +32,7 @@ def export_for_submission(source_dir, target_dir):
 
 
 if __name__ == "__main__":
-    folder = "/teamspace/studios/this_studio/nnUNet/data" # promise12
+    folder = "/teamspace/studios/this_studio/nnUNet/data/Promise2012" # promise12
     out_folder = "/teamspace/studios/this_studio/nnUNet_raw/nnUNet_raw_data/Task024_Promise"
 
     maybe_mkdir_p(join(out_folder, "imagesTr"))
