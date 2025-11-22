@@ -1,0 +1,216 @@
+{
+  "vmamba_backend_available": true,
+  "params_total": 7465024,
+  "params_trainable": 7465024,
+  "stages": [
+    {
+      "name": "down11",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 1,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down12",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 1,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down13",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 1,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down14",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 1,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "bottleneck1",
+      "module": "Down",
+      "group": "bottleneck",
+      "stage": 1,
+      "impl": "N/A",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down21",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down22",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down23",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "bottleneck2",
+      "module": "Down",
+      "group": "bottleneck",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down31",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 3,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "down32",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 3,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "bottleneck3",
+      "module": "Down",
+      "group": "bottleneck",
+      "stage": 3,
+      "impl": "CBzMamba",
+      "vmamba_enabled": true,
+      "backend": "mamba",
+      "bidirectional": false,
+      "residual": false
+    },
+    {
+      "name": "down41",
+      "module": "Down",
+      "group": "encoder",
+      "stage": 4,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "bottleneck4",
+      "module": "Down",
+      "group": "bottleneck",
+      "stage": 4,
+      "impl": "CBzMamba",
+      "vmamba_enabled": true,
+      "backend": "mamba",
+      "bidirectional": false,
+      "residual": false
+    },
+    {
+      "name": "bottleneck5",
+      "module": "Down",
+      "group": "bottleneck",
+      "stage": 5,
+      "impl": "CBzMamba",
+      "vmamba_enabled": true,
+      "backend": "mamba",
+      "bidirectional": false,
+      "residual": false
+    },
+    {
+      "name": "up41",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 4,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up31",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 3,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up32",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 3,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up21",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up22",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up23",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 2,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up11",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 1,
+      "impl": "N/A",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up12",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 1,
+      "impl": "N/A",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up13",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 1,
+      "impl": "N/A",
+      "vmamba_enabled": false
+    },
+    {
+      "name": "up14",
+      "module": "Up",
+      "group": "decoder",
+      "stage": 1,
+      "impl": "CB3d",
+      "vmamba_enabled": false
+    }
+  ]
+}

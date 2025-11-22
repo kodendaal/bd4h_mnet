@@ -1,0 +1,7 @@
+Starting... 
+2025-11-22 16:01:22.824847: Training config: max_epochs=1, gated_fusion=spatial 
+2025-11-22 16:01:23.238801: Model params: total=8,769,484, trainable=8,769,484 
+2025-11-22 16:01:25.436282: loading checkpoint /teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task029_LITS/myTrainer_reproduction_WandB__nnUNetData_plans_v2.1_trgSp_z1p0_yx0p9121_sg/fold_0/model_best.model train= False 
+2025-11-22 16:48:49.159497: finished prediction 
+2025-11-22 16:48:49.161563: evaluation of raw predictions 
+2025-11-22 16:49:01.155700: determining postprocessing 

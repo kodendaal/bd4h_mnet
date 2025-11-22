@@ -1,0 +1,2347 @@
+Starting... 
+2025-11-16 09:11:57.894097: Training config: max_epochs=1, gated_fusion=spatial 
+2025-11-16 09:11:58.322964: Model params: total=7,465,024, trainable=7,465,024 
+2025-11-16 09:11:59.505835: [WARN] Parameter count decreased -14.87% vs baseline (8.769M). 
+2025-11-16 09:12:14.057261: Unable to plot network architecture: 
+2025-11-16 09:12:14.069935: No module named 'hiddenlayer' 
+2025-11-16 09:12:14.073921: 
+printing the network instead:
+ 
+2025-11-16 09:12:14.080760: MNet(
+  (down11): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(1, 32, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(32, 32, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(1, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(32, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down12): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(32, 48, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(48, 48, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(32, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(48, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down13): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(48, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(48, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down14): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (bottleneck1): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(96, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up11): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(176, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up12): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(144, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up13): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(112, 48, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(48, 48, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up14): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 32, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(32, 32, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(32, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down21): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(32, 48, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(48, 48, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(32, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(48, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down22): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(48, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(48, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down23): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (bottleneck2): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(96, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 96, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(96, 96, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up21): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(176, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(176, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up22): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(144, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(144, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up23): Up(
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(112, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(48, 48, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down31): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(48, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(48, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down32): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (bottleneck3): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(96, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CBzMamba(
+      (pre): Conv3d(80, 40, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      (n1): InstanceNorm3d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (a1): LeakyReLU(negative_slope=0.01, inplace=True)
+      (zssm): ZScan(
+        (block): Mamba(
+          (in_proj): Linear(in_features=40, out_features=160, bias=False)
+          (conv1d): Conv1d(80, 80, kernel_size=(4,), stride=(1,), padding=(3,), groups=80)
+          (act): SiLU()
+          (x_proj): Linear(in_features=80, out_features=35, bias=False)
+          (dt_proj): Linear(in_features=3, out_features=80, bias=True)
+          (out_proj): Linear(in_features=80, out_features=40, bias=False)
+        )
+      )
+      (post): Conv3d(40, 96, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      (n2): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (a2): LeakyReLU(negative_slope=0.01, inplace=True)
+    )
+  )
+  (up31): Up(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(176, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(176, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (up32): Up(
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(144, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (down41): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(64, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (bottleneck4): Down(
+    (CB2d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(80, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(96, 96, kernel_size=(1, 3, 3), stride=(1, 1, 1), padding=(0, 1, 1), bias=False)
+        (norm): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+    (CB3d): CBzMamba(
+      (pre): Conv3d(80, 40, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      (n1): InstanceNorm3d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (a1): LeakyReLU(negative_slope=0.01, inplace=True)
+      (zssm): ZScan(
+        (block): Mamba(
+          (in_proj): Linear(in_features=40, out_features=160, bias=False)
+          (conv1d): Conv1d(80, 80, kernel_size=(4,), stride=(1,), padding=(3,), groups=80)
+          (act): SiLU()
+          (x_proj): Linear(in_features=80, out_features=35, bias=False)
+          (dt_proj): Linear(in_features=3, out_features=80, bias=True)
+          (out_proj): Linear(in_features=80, out_features=40, bias=False)
+        )
+      )
+      (post): Conv3d(40, 96, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      (n2): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (a2): LeakyReLU(negative_slope=0.01, inplace=True)
+    )
+  )
+  (up41): Up(
+    (CB3d): CB3d(
+      (conv1): CNA3d(
+        (conv): Conv3d(176, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+      (conv2): CNA3d(
+        (conv): Conv3d(80, 80, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1), bias=False)
+        (norm): InstanceNorm3d(80, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+        (activation): LeakyReLU(negative_slope=0.01, inplace=True)
+      )
+    )
+  )
+  (bottleneck5): Down(
+    (CB3d): CBzMamba(
+      (pre): Conv3d(80, 40, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      (n1): InstanceNorm3d(40, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (a1): LeakyReLU(negative_slope=0.01, inplace=True)
+      (zssm): ZScan(
+        (block): Mamba(
+          (in_proj): Linear(in_features=40, out_features=160, bias=False)
+          (conv1d): Conv1d(80, 80, kernel_size=(4,), stride=(1,), padding=(3,), groups=80)
+          (act): SiLU()
+          (x_proj): Linear(in_features=80, out_features=35, bias=False)
+          (dt_proj): Linear(in_features=3, out_features=80, bias=True)
+          (out_proj): Linear(in_features=80, out_features=40, bias=False)
+        )
+      )
+      (post): Conv3d(40, 96, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      (n2): InstanceNorm3d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=False)
+      (a2): LeakyReLU(negative_slope=0.01, inplace=True)
+    )
+  )
+  (outputs): ModuleList(
+    (0): Conv3d(32, 3, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    (1-2): 2 x Conv3d(48, 3, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    (3-4): 2 x Conv3d(64, 3, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    (5-6): 2 x Conv3d(80, 3, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+  )
+) 
+2025-11-16 09:12:14.136833: 
+ 
+2025-11-16 09:12:14.153726: 
+epoch:  0 
+2025-11-16 09:17:11.896518: train loss : 0.0241 
+2025-11-16 09:17:29.267226: validation loss: 0.0140 
+2025-11-16 09:17:29.270373: Average global foreground Dice: [0.785, 0.0039] 
+2025-11-16 09:17:29.273023: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:17:29.830337: lr: 0.00994 
+2025-11-16 09:17:29.833469: [W&B] Logged epoch 0 to WandB 
+2025-11-16 09:17:29.834858: [W&B] Epoch 0, continue_training=True, max_epochs=150 
+2025-11-16 09:17:29.836201: This epoch took 315.674035 s
+ 
+2025-11-16 09:17:29.837556: 
+epoch:  1 
+2025-11-16 09:22:04.163441: train loss : -0.1503 
+2025-11-16 09:22:21.539635: validation loss: -0.0764 
+2025-11-16 09:22:21.542465: Average global foreground Dice: [0.7991, 0.0152] 
+2025-11-16 09:22:21.544464: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:22:22.088096: lr: 0.00988 
+2025-11-16 09:22:22.124635: saving checkpoint... 
+2025-11-16 09:22:22.240179: done, saving took 0.15 seconds 
+2025-11-16 09:22:22.245078: [W&B] Logged epoch 1 to WandB 
+2025-11-16 09:22:22.246382: [W&B] Epoch 1, continue_training=True, max_epochs=150 
+2025-11-16 09:22:22.247678: This epoch took 292.408402 s
+ 
+2025-11-16 09:22:22.248956: 
+epoch:  2 
+2025-11-16 09:26:55.797101: train loss : -0.2287 
+2025-11-16 09:27:16.364011: validation loss: -0.1840 
+2025-11-16 09:27:16.370347: Average global foreground Dice: [0.846, 0.0334] 
+2025-11-16 09:27:16.373621: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:27:17.182034: lr: 0.00982 
+2025-11-16 09:27:17.222247: saving checkpoint... 
+2025-11-16 09:27:17.451146: done, saving took 0.27 seconds 
+2025-11-16 09:27:17.468637: [W&B] Logged epoch 2 to WandB 
+2025-11-16 09:27:17.469894: [W&B] Epoch 2, continue_training=True, max_epochs=150 
+2025-11-16 09:27:17.471198: This epoch took 295.220440 s
+ 
+2025-11-16 09:27:17.472706: 
+epoch:  3 
+2025-11-16 09:31:51.363625: train loss : -0.2861 
+2025-11-16 09:32:08.770908: validation loss: -0.1895 
+2025-11-16 09:32:08.773632: Average global foreground Dice: [0.863, 0.031] 
+2025-11-16 09:32:08.775666: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:32:09.319701: lr: 0.00976 
+2025-11-16 09:32:09.355749: saving checkpoint... 
+2025-11-16 09:32:09.541245: done, saving took 0.22 seconds 
+2025-11-16 09:32:09.622313: [W&B] Logged epoch 3 to WandB 
+2025-11-16 09:32:09.623682: [W&B] Epoch 3, continue_training=True, max_epochs=150 
+2025-11-16 09:32:09.624959: This epoch took 292.150319 s
+ 
+2025-11-16 09:32:09.626180: 
+epoch:  4 
+2025-11-16 09:36:43.183866: train loss : -0.3035 
+2025-11-16 09:37:00.610076: validation loss: -0.1887 
+2025-11-16 09:37:00.647795: Average global foreground Dice: [0.8756, 0.0172] 
+2025-11-16 09:37:00.650154: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:37:01.228503: lr: 0.009699 
+2025-11-16 09:37:01.263162: saving checkpoint... 
+2025-11-16 09:37:01.400169: done, saving took 0.17 seconds 
+2025-11-16 09:37:01.404624: [W&B] Logged epoch 4 to WandB 
+2025-11-16 09:37:01.405947: [W&B] Epoch 4, continue_training=True, max_epochs=150 
+2025-11-16 09:37:01.407360: This epoch took 291.779399 s
+ 
+2025-11-16 09:37:01.408728: 
+epoch:  5 
+2025-11-16 09:41:35.115676: train loss : -0.3661 
+2025-11-16 09:41:52.497470: validation loss: -0.2377 
+2025-11-16 09:41:52.500108: Average global foreground Dice: [0.8719, 0.032] 
+2025-11-16 09:41:52.502120: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:41:53.043000: lr: 0.009639 
+2025-11-16 09:41:53.078921: saving checkpoint... 
+2025-11-16 09:41:53.210717: done, saving took 0.17 seconds 
+2025-11-16 09:41:53.234691: [W&B] Logged epoch 5 to WandB 
+2025-11-16 09:41:53.236099: [W&B] Epoch 5, continue_training=True, max_epochs=150 
+2025-11-16 09:41:53.237254: This epoch took 291.826697 s
+ 
+2025-11-16 09:41:53.238559: 
+epoch:  6 
+2025-11-16 09:46:26.731067: train loss : -0.4139 
+2025-11-16 09:46:44.127637: validation loss: -0.2133 
+2025-11-16 09:46:44.129838: Average global foreground Dice: [0.8474, 0.042] 
+2025-11-16 09:46:44.131673: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:46:44.724501: lr: 0.009579 
+2025-11-16 09:46:44.766477: saving checkpoint... 
+2025-11-16 09:46:44.929308: done, saving took 0.20 seconds 
+2025-11-16 09:46:44.933606: [W&B] Logged epoch 6 to WandB 
+2025-11-16 09:46:44.934817: [W&B] Epoch 6, continue_training=True, max_epochs=150 
+2025-11-16 09:46:44.935915: This epoch took 291.695654 s
+ 
+2025-11-16 09:46:44.937092: 
+epoch:  7 
+2025-11-16 09:51:18.698875: train loss : -0.4397 
+2025-11-16 09:51:36.111195: validation loss: -0.3220 
+2025-11-16 09:51:36.114285: Average global foreground Dice: [0.9241, 0.0415] 
+2025-11-16 09:51:36.116341: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:51:36.641834: lr: 0.009519 
+2025-11-16 09:51:36.677161: saving checkpoint... 
+2025-11-16 09:51:36.849684: done, saving took 0.21 seconds 
+2025-11-16 09:51:36.854609: [W&B] Logged epoch 7 to WandB 
+2025-11-16 09:51:36.855857: [W&B] Epoch 7, continue_training=True, max_epochs=150 
+2025-11-16 09:51:36.857022: This epoch took 291.918189 s
+ 
+2025-11-16 09:51:36.858138: 
+epoch:  8 
+2025-11-16 09:56:10.253641: train loss : -0.4492 
+2025-11-16 09:56:27.691558: validation loss: -0.2630 
+2025-11-16 09:56:27.694451: Average global foreground Dice: [0.8928, 0.041] 
+2025-11-16 09:56:27.696653: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 09:56:28.231952: lr: 0.009458 
+2025-11-16 09:56:28.267440: saving checkpoint... 
+2025-11-16 09:56:28.408300: done, saving took 0.17 seconds 
+2025-11-16 09:56:28.529998: [W&B] Logged epoch 8 to WandB 
+2025-11-16 09:56:28.531630: [W&B] Epoch 8, continue_training=True, max_epochs=150 
+2025-11-16 09:56:28.532765: This epoch took 291.673007 s
+ 
+2025-11-16 09:56:28.533835: 
+epoch:  9 
+2025-11-16 10:01:06.655426: train loss : -0.4480 
+2025-11-16 10:01:24.099648: validation loss: -0.2560 
+2025-11-16 10:01:24.102309: Average global foreground Dice: [0.8975, 0.056] 
+2025-11-16 10:01:24.104065: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:01:24.624755: lr: 0.009398 
+2025-11-16 10:01:24.906295: saving checkpoint... 
+2025-11-16 10:01:25.115366: done, saving took 0.49 seconds 
+2025-11-16 10:01:25.120775: [W&B] Logged epoch 9 to WandB 
+2025-11-16 10:01:25.122276: [W&B] Epoch 9, continue_training=True, max_epochs=150 
+2025-11-16 10:01:25.123877: This epoch took 296.588214 s
+ 
+2025-11-16 10:01:25.125272: 
+epoch:  10 
+2025-11-16 10:05:59.059028: train loss : -0.4496 
+2025-11-16 10:06:16.460483: validation loss: -0.3591 
+2025-11-16 10:06:16.463298: Average global foreground Dice: [0.9289, 0.0769] 
+2025-11-16 10:06:16.465117: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:06:16.987832: lr: 0.009338 
+2025-11-16 10:06:17.034408: saving checkpoint... 
+2025-11-16 10:06:17.220399: done, saving took 0.23 seconds 
+2025-11-16 10:06:17.224914: [W&B] Logged epoch 10 to WandB 
+2025-11-16 10:06:17.226297: [W&B] Epoch 10, continue_training=True, max_epochs=150 
+2025-11-16 10:06:17.227505: This epoch took 292.100512 s
+ 
+2025-11-16 10:06:17.228734: 
+epoch:  11 
+2025-11-16 10:10:51.258042: train loss : -0.4515 
+2025-11-16 10:11:08.678344: validation loss: -0.2070 
+2025-11-16 10:11:08.680869: Average global foreground Dice: [0.8706, 0.0232] 
+2025-11-16 10:11:08.682834: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:11:09.210063: lr: 0.009277 
+2025-11-16 10:11:09.231388: saving checkpoint... 
+2025-11-16 10:11:09.345804: done, saving took 0.13 seconds 
+2025-11-16 10:11:09.350833: [W&B] Logged epoch 11 to WandB 
+2025-11-16 10:11:09.352078: [W&B] Epoch 11, continue_training=True, max_epochs=150 
+2025-11-16 10:11:09.353450: This epoch took 292.123143 s
+ 
+2025-11-16 10:11:09.354675: 
+epoch:  12 
+2025-11-16 10:15:43.197208: train loss : -0.4772 
+2025-11-16 10:16:00.639090: validation loss: -0.2290 
+2025-11-16 10:16:00.642000: Average global foreground Dice: [0.8727, 0.0706] 
+2025-11-16 10:16:00.644015: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:16:01.202737: lr: 0.009217 
+2025-11-16 10:16:01.461251: saving checkpoint... 
+2025-11-16 10:16:01.687310: done, saving took 0.48 seconds 
+2025-11-16 10:16:01.734532: [W&B] Logged epoch 12 to WandB 
+2025-11-16 10:16:01.735999: [W&B] Epoch 12, continue_training=True, max_epochs=150 
+2025-11-16 10:16:01.737263: This epoch took 292.380870 s
+ 
+2025-11-16 10:16:01.738482: 
+epoch:  13 
+2025-11-16 10:20:35.825412: train loss : -0.4566 
+2025-11-16 10:20:53.245865: validation loss: -0.2783 
+2025-11-16 10:20:53.248647: Average global foreground Dice: [0.8882, 0.0764] 
+2025-11-16 10:20:53.251027: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:20:53.900769: lr: 0.009156 
+2025-11-16 10:20:54.197054: saving checkpoint... 
+2025-11-16 10:20:54.357191: done, saving took 0.45 seconds 
+2025-11-16 10:20:54.374704: [W&B] Logged epoch 13 to WandB 
+2025-11-16 10:20:54.376015: [W&B] Epoch 13, continue_training=True, max_epochs=150 
+2025-11-16 10:20:54.377776: This epoch took 292.637578 s
+ 
+2025-11-16 10:20:54.379128: 
+epoch:  14 
+2025-11-16 10:25:28.136084: train loss : -0.4909 
+2025-11-16 10:25:45.591143: validation loss: -0.2673 
+2025-11-16 10:25:45.593874: Average global foreground Dice: [0.8851, 0.0636] 
+2025-11-16 10:25:45.595782: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:25:46.147847: lr: 0.009095 
+2025-11-16 10:25:46.427071: saving checkpoint... 
+2025-11-16 10:25:46.624089: done, saving took 0.47 seconds 
+2025-11-16 10:25:46.670810: [W&B] Logged epoch 14 to WandB 
+2025-11-16 10:25:46.672115: [W&B] Epoch 14, continue_training=True, max_epochs=150 
+2025-11-16 10:25:46.673308: This epoch took 292.292490 s
+ 
+2025-11-16 10:25:46.674629: 
+epoch:  15 
+2025-11-16 10:30:20.830897: train loss : -0.5190 
+2025-11-16 10:30:38.252855: validation loss: -0.2780 
+2025-11-16 10:30:38.255693: Average global foreground Dice: [0.8738, 0.0538] 
+2025-11-16 10:30:38.257594: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:30:39.141051: lr: 0.009035 
+2025-11-16 10:30:39.183601: saving checkpoint... 
+2025-11-16 10:30:39.403743: done, saving took 0.26 seconds 
+2025-11-16 10:30:39.408301: [W&B] Logged epoch 15 to WandB 
+2025-11-16 10:30:39.409584: [W&B] Epoch 15, continue_training=True, max_epochs=150 
+2025-11-16 10:30:39.410876: This epoch took 292.734498 s
+ 
+2025-11-16 10:30:39.412000: 
+epoch:  16 
+2025-11-16 10:35:13.196019: train loss : -0.5341 
+2025-11-16 10:35:30.641445: validation loss: -0.2955 
+2025-11-16 10:35:30.644269: Average global foreground Dice: [0.9033, 0.0329] 
+2025-11-16 10:35:30.646297: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:35:31.494627: lr: 0.008974 
+2025-11-16 10:35:31.539754: saving checkpoint... 
+2025-11-16 10:35:31.757037: done, saving took 0.26 seconds 
+2025-11-16 10:35:31.761766: [W&B] Logged epoch 16 to WandB 
+2025-11-16 10:35:31.763196: [W&B] Epoch 16, continue_training=True, max_epochs=150 
+2025-11-16 10:35:31.764661: This epoch took 292.351187 s
+ 
+2025-11-16 10:35:31.765960: 
+epoch:  17 
+2025-11-16 10:40:05.525241: train loss : -0.5635 
+2025-11-16 10:40:22.984898: validation loss: -0.2661 
+2025-11-16 10:40:22.987777: Average global foreground Dice: [0.8868, 0.0374] 
+2025-11-16 10:40:22.989950: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:40:23.606038: lr: 0.008913 
+2025-11-16 10:40:23.627877: saving checkpoint... 
+2025-11-16 10:40:23.775014: done, saving took 0.17 seconds 
+2025-11-16 10:40:23.780489: [W&B] Logged epoch 17 to WandB 
+2025-11-16 10:40:23.782410: [W&B] Epoch 17, continue_training=True, max_epochs=150 
+2025-11-16 10:40:23.784104: This epoch took 292.016546 s
+ 
+2025-11-16 10:40:23.785456: 
+epoch:  18 
+2025-11-16 10:44:57.762101: train loss : -0.5202 
+2025-11-16 10:45:15.183868: validation loss: -0.3104 
+2025-11-16 10:45:15.186838: Average global foreground Dice: [0.8968, 0.0562] 
+2025-11-16 10:45:15.188864: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:45:15.728953: lr: 0.008852 
+2025-11-16 10:45:15.750435: saving checkpoint... 
+2025-11-16 10:45:15.882150: done, saving took 0.15 seconds 
+2025-11-16 10:45:15.938106: [W&B] Logged epoch 18 to WandB 
+2025-11-16 10:45:15.939821: [W&B] Epoch 18, continue_training=True, max_epochs=150 
+2025-11-16 10:45:15.941278: This epoch took 292.154156 s
+ 
+2025-11-16 10:45:15.942844: 
+epoch:  19 
+2025-11-16 10:49:54.441968: train loss : -0.5175 
+2025-11-16 10:50:11.864243: validation loss: -0.2726 
+2025-11-16 10:50:11.866842: Average global foreground Dice: [0.8951, 0.0344] 
+2025-11-16 10:50:11.868646: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:50:12.695350: lr: 0.008792 
+2025-11-16 10:50:12.962315: saving checkpoint... 
+2025-11-16 10:50:13.171373: done, saving took 0.47 seconds 
+2025-11-16 10:50:13.175859: [W&B] Logged epoch 19 to WandB 
+2025-11-16 10:50:13.177238: [W&B] Epoch 19, continue_training=True, max_epochs=150 
+2025-11-16 10:50:13.178523: This epoch took 297.233491 s
+ 
+2025-11-16 10:50:13.179782: 
+epoch:  20 
+2025-11-16 10:54:46.936481: train loss : -0.5474 
+2025-11-16 10:55:04.360639: validation loss: -0.3826 
+2025-11-16 10:55:04.363249: Average global foreground Dice: [0.9191, 0.0241] 
+2025-11-16 10:55:04.365077: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:55:05.168826: lr: 0.008731 
+2025-11-16 10:55:05.190725: saving checkpoint... 
+2025-11-16 10:55:05.377106: done, saving took 0.21 seconds 
+2025-11-16 10:55:05.382282: [W&B] Logged epoch 20 to WandB 
+2025-11-16 10:55:05.383701: [W&B] Epoch 20, continue_training=True, max_epochs=150 
+2025-11-16 10:55:05.385046: This epoch took 292.203681 s
+ 
+2025-11-16 10:55:05.386366: 
+epoch:  21 
+2025-11-16 10:59:39.443496: train loss : -0.5653 
+2025-11-16 10:59:56.870243: validation loss: -0.3352 
+2025-11-16 10:59:56.873762: Average global foreground Dice: [0.9011, 0.0344] 
+2025-11-16 10:59:56.875774: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 10:59:57.703574: lr: 0.00867 
+2025-11-16 10:59:57.732832: saving checkpoint... 
+2025-11-16 10:59:57.944870: done, saving took 0.24 seconds 
+2025-11-16 10:59:57.951013: [W&B] Logged epoch 21 to WandB 
+2025-11-16 10:59:57.952366: [W&B] Epoch 21, continue_training=True, max_epochs=150 
+2025-11-16 10:59:57.953658: This epoch took 292.565532 s
+ 
+2025-11-16 10:59:57.954799: 
+epoch:  22 
+2025-11-16 11:04:31.726670: train loss : -0.5512 
+2025-11-16 11:04:49.193786: validation loss: -0.3430 
+2025-11-16 11:04:49.196376: Average global foreground Dice: [0.9156, 0.0452] 
+2025-11-16 11:04:49.198544: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:04:49.977315: lr: 0.008609 
+2025-11-16 11:04:50.011116: saving checkpoint... 
+2025-11-16 11:04:50.226334: done, saving took 0.25 seconds 
+2025-11-16 11:04:50.231795: [W&B] Logged epoch 22 to WandB 
+2025-11-16 11:04:50.233208: [W&B] Epoch 22, continue_training=True, max_epochs=150 
+2025-11-16 11:04:50.234446: This epoch took 292.277866 s
+ 
+2025-11-16 11:04:50.235769: 
+epoch:  23 
+2025-11-16 11:09:24.144747: train loss : -0.5402 
+2025-11-16 11:09:41.573344: validation loss: -0.2950 
+2025-11-16 11:09:41.576544: Average global foreground Dice: [0.8879, 0.0527] 
+2025-11-16 11:09:41.578281: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:09:42.370956: lr: 0.008548 
+2025-11-16 11:09:42.400690: saving checkpoint... 
+2025-11-16 11:09:42.586720: done, saving took 0.21 seconds 
+2025-11-16 11:09:42.592012: [W&B] Logged epoch 23 to WandB 
+2025-11-16 11:09:42.593479: [W&B] Epoch 23, continue_training=True, max_epochs=150 
+2025-11-16 11:09:42.594782: This epoch took 292.357414 s
+ 
+2025-11-16 11:09:42.596438: 
+epoch:  24 
+2025-11-16 11:14:16.397212: train loss : -0.5789 
+2025-11-16 11:14:33.840655: validation loss: -0.3798 
+2025-11-16 11:14:33.842750: Average global foreground Dice: [0.9224, 0.0892] 
+2025-11-16 11:14:33.845083: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:14:34.834351: lr: 0.008487 
+2025-11-16 11:14:34.876603: saving checkpoint... 
+2025-11-16 11:14:35.109755: done, saving took 0.27 seconds 
+2025-11-16 11:14:35.115346: [W&B] Logged epoch 24 to WandB 
+2025-11-16 11:14:35.116631: [W&B] Epoch 24, continue_training=True, max_epochs=150 
+2025-11-16 11:14:35.117838: This epoch took 292.518955 s
+ 
+2025-11-16 11:14:35.119013: 
+epoch:  25 
+2025-11-16 11:19:09.378271: train loss : -0.5781 
+2025-11-16 11:19:26.830666: validation loss: -0.3095 
+2025-11-16 11:19:26.833967: Average global foreground Dice: [0.8957, 0.0402] 
+2025-11-16 11:19:26.835990: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:19:27.647837: lr: 0.008426 
+2025-11-16 11:19:27.688797: saving checkpoint... 
+2025-11-16 11:19:27.854259: done, saving took 0.20 seconds 
+2025-11-16 11:19:27.859978: [W&B] Logged epoch 25 to WandB 
+2025-11-16 11:19:27.861423: [W&B] Epoch 25, continue_training=True, max_epochs=150 
+2025-11-16 11:19:27.862828: This epoch took 292.742067 s
+ 
+2025-11-16 11:19:27.864033: 
+epoch:  26 
+2025-11-16 11:24:01.709305: train loss : -0.5486 
+2025-11-16 11:24:19.144053: validation loss: -0.2504 
+2025-11-16 11:24:19.147133: Average global foreground Dice: [0.8715, 0.0362] 
+2025-11-16 11:24:19.149204: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:24:19.988936: lr: 0.008364 
+2025-11-16 11:24:19.991847: [W&B] Logged epoch 26 to WandB 
+2025-11-16 11:24:19.993271: [W&B] Epoch 26, continue_training=True, max_epochs=150 
+2025-11-16 11:24:19.994849: This epoch took 292.129008 s
+ 
+2025-11-16 11:24:19.996164: 
+epoch:  27 
+2025-11-16 11:28:54.567205: train loss : -0.5728 
+2025-11-16 11:29:12.025148: validation loss: -0.2533 
+2025-11-16 11:29:12.028047: Average global foreground Dice: [0.8654, 0.0324] 
+2025-11-16 11:29:12.029987: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:29:12.577554: lr: 0.008303 
+2025-11-16 11:29:12.580380: [W&B] Logged epoch 27 to WandB 
+2025-11-16 11:29:12.581640: [W&B] Epoch 27, continue_training=True, max_epochs=150 
+2025-11-16 11:29:12.582875: This epoch took 292.584935 s
+ 
+2025-11-16 11:29:12.583855: 
+epoch:  28 
+2025-11-16 11:33:46.881345: train loss : -0.5810 
+2025-11-16 11:34:04.370996: validation loss: -0.2557 
+2025-11-16 11:34:04.373882: Average global foreground Dice: [0.8658, 0.0684] 
+2025-11-16 11:34:04.376043: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:34:08.039450: lr: 0.008242 
+2025-11-16 11:34:08.042380: [W&B] Logged epoch 28 to WandB 
+2025-11-16 11:34:08.043750: [W&B] Epoch 28, continue_training=True, max_epochs=150 
+2025-11-16 11:34:08.044974: This epoch took 295.459266 s
+ 
+2025-11-16 11:34:08.046547: 
+epoch:  29 
+2025-11-16 11:38:42.591977: train loss : -0.5821 
+2025-11-16 11:39:00.024808: validation loss: -0.3460 
+2025-11-16 11:39:00.027639: Average global foreground Dice: [0.8947, 0.0878] 
+2025-11-16 11:39:00.029560: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:39:00.860605: lr: 0.008181 
+2025-11-16 11:39:01.164211: saving checkpoint... 
+2025-11-16 11:39:01.365047: done, saving took 0.50 seconds 
+2025-11-16 11:39:01.370938: [W&B] Logged epoch 29 to WandB 
+2025-11-16 11:39:01.372161: [W&B] Epoch 29, continue_training=True, max_epochs=150 
+2025-11-16 11:39:01.373505: This epoch took 293.325433 s
+ 
+2025-11-16 11:39:01.374649: 
+epoch:  30 
+2025-11-16 11:43:35.733105: train loss : -0.5861 
+2025-11-16 11:43:53.163275: validation loss: -0.3549 
+2025-11-16 11:43:53.166214: Average global foreground Dice: [0.8935, 0.0469] 
+2025-11-16 11:43:53.168205: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:43:53.802661: lr: 0.008119 
+2025-11-16 11:43:53.828056: saving checkpoint... 
+2025-11-16 11:43:53.985894: done, saving took 0.18 seconds 
+2025-11-16 11:43:54.117170: [W&B] Logged epoch 30 to WandB 
+2025-11-16 11:43:54.118586: [W&B] Epoch 30, continue_training=True, max_epochs=150 
+2025-11-16 11:43:54.119704: This epoch took 292.743469 s
+ 
+2025-11-16 11:43:54.120846: 
+epoch:  31 
+2025-11-16 11:48:28.503174: train loss : -0.5985 
+2025-11-16 11:48:45.920470: validation loss: -0.2855 
+2025-11-16 11:48:45.948416: Average global foreground Dice: [0.882, 0.0352] 
+2025-11-16 11:48:45.952089: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:48:46.787213: lr: 0.008058 
+2025-11-16 11:48:46.790305: [W&B] Logged epoch 31 to WandB 
+2025-11-16 11:48:46.791834: [W&B] Epoch 31, continue_training=True, max_epochs=150 
+2025-11-16 11:48:46.793640: This epoch took 292.671382 s
+ 
+2025-11-16 11:48:46.795058: 
+epoch:  32 
+2025-11-16 11:53:20.817514: train loss : -0.6065 
+2025-11-16 11:53:38.245386: validation loss: -0.2936 
+2025-11-16 11:53:38.248214: Average global foreground Dice: [0.9077, 0.0511] 
+2025-11-16 11:53:38.250603: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:53:39.198221: lr: 0.007996 
+2025-11-16 11:53:39.349144: saving checkpoint... 
+2025-11-16 11:53:39.557125: done, saving took 0.36 seconds 
+2025-11-16 11:53:39.577862: [W&B] Logged epoch 32 to WandB 
+2025-11-16 11:53:39.579251: [W&B] Epoch 32, continue_training=True, max_epochs=150 
+2025-11-16 11:53:39.580388: This epoch took 292.783469 s
+ 
+2025-11-16 11:53:39.581426: 
+epoch:  33 
+2025-11-16 11:58:14.246903: train loss : -0.5830 
+2025-11-16 11:58:31.704422: validation loss: -0.3641 
+2025-11-16 11:58:31.707023: Average global foreground Dice: [0.9092, 0.0554] 
+2025-11-16 11:58:31.708845: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 11:58:32.553375: lr: 0.007935 
+2025-11-16 11:58:32.858984: saving checkpoint... 
+2025-11-16 11:58:33.101677: done, saving took 0.55 seconds 
+2025-11-16 11:58:33.142758: [W&B] Logged epoch 33 to WandB 
+2025-11-16 11:58:33.144178: [W&B] Epoch 33, continue_training=True, max_epochs=150 
+2025-11-16 11:58:33.145597: This epoch took 293.562629 s
+ 
+2025-11-16 11:58:33.146854: 
+epoch:  34 
+2025-11-16 12:03:07.009494: train loss : -0.6364 
+2025-11-16 12:03:24.440115: validation loss: -0.3228 
+2025-11-16 12:03:24.443208: Average global foreground Dice: [0.9007, 0.0989] 
+2025-11-16 12:03:24.445084: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:03:25.284080: lr: 0.007873 
+2025-11-16 12:03:25.318782: saving checkpoint... 
+2025-11-16 12:03:25.472653: done, saving took 0.19 seconds 
+2025-11-16 12:03:25.498696: [W&B] Logged epoch 34 to WandB 
+2025-11-16 12:03:25.500133: [W&B] Epoch 34, continue_training=True, max_epochs=150 
+2025-11-16 12:03:25.501484: This epoch took 292.352584 s
+ 
+2025-11-16 12:03:25.502799: 
+epoch:  35 
+2025-11-16 12:07:59.821705: train loss : -0.6460 
+2025-11-16 12:08:17.266795: validation loss: -0.4049 
+2025-11-16 12:08:17.269863: Average global foreground Dice: [0.9191, 0.0571] 
+2025-11-16 12:08:17.274727: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:08:18.122137: lr: 0.007811 
+2025-11-16 12:08:18.146062: saving checkpoint... 
+2025-11-16 12:08:18.357759: done, saving took 0.23 seconds 
+2025-11-16 12:08:18.365517: [W&B] Logged epoch 35 to WandB 
+2025-11-16 12:08:18.366795: [W&B] Epoch 35, continue_training=True, max_epochs=150 
+2025-11-16 12:08:18.368178: This epoch took 292.863534 s
+ 
+2025-11-16 12:08:18.369700: 
+epoch:  36 
+2025-11-16 12:12:52.100196: train loss : -0.6186 
+2025-11-16 12:13:09.547858: validation loss: -0.4743 
+2025-11-16 12:13:09.550724: Average global foreground Dice: [0.9301, 0.1733] 
+2025-11-16 12:13:09.552779: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:13:10.111568: lr: 0.00775 
+2025-11-16 12:13:10.144241: saving checkpoint... 
+2025-11-16 12:13:10.400655: done, saving took 0.29 seconds 
+2025-11-16 12:13:10.420207: [W&B] Logged epoch 36 to WandB 
+2025-11-16 12:13:10.421773: [W&B] Epoch 36, continue_training=True, max_epochs=150 
+2025-11-16 12:13:10.422940: This epoch took 292.051516 s
+ 
+2025-11-16 12:13:10.424045: 
+epoch:  37 
+2025-11-16 12:17:44.466049: train loss : -0.6164 
+2025-11-16 12:18:01.923069: validation loss: -0.2803 
+2025-11-16 12:18:01.925824: Average global foreground Dice: [0.892, 0.0484] 
+2025-11-16 12:18:01.927712: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:18:02.557781: lr: 0.007688 
+2025-11-16 12:18:02.560606: [W&B] Logged epoch 37 to WandB 
+2025-11-16 12:18:02.561952: [W&B] Epoch 37, continue_training=True, max_epochs=150 
+2025-11-16 12:18:02.563352: This epoch took 292.137846 s
+ 
+2025-11-16 12:18:02.564550: 
+epoch:  38 
+2025-11-16 12:22:39.219682: train loss : -0.6268 
+2025-11-16 12:22:56.670426: validation loss: -0.4176 
+2025-11-16 12:22:56.673619: Average global foreground Dice: [0.9013, 0.0893] 
+2025-11-16 12:22:56.675574: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:22:57.539822: lr: 0.007626 
+2025-11-16 12:22:57.828569: saving checkpoint... 
+2025-11-16 12:22:58.056633: done, saving took 0.51 seconds 
+2025-11-16 12:22:58.061767: [W&B] Logged epoch 38 to WandB 
+2025-11-16 12:22:58.063144: [W&B] Epoch 38, continue_training=True, max_epochs=150 
+2025-11-16 12:22:58.064423: This epoch took 295.498146 s
+ 
+2025-11-16 12:22:58.065589: 
+epoch:  39 
+2025-11-16 12:27:32.377454: train loss : -0.6024 
+2025-11-16 12:27:49.823015: validation loss: -0.2794 
+2025-11-16 12:27:49.825889: Average global foreground Dice: [0.8978, 0.03] 
+2025-11-16 12:27:49.828105: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:27:50.673431: lr: 0.007564 
+2025-11-16 12:27:50.677523: [W&B] Logged epoch 39 to WandB 
+2025-11-16 12:27:50.678844: [W&B] Epoch 39, continue_training=True, max_epochs=150 
+2025-11-16 12:27:50.679946: This epoch took 292.612667 s
+ 
+2025-11-16 12:27:50.681119: 
+epoch:  40 
+2025-11-16 12:32:24.568368: train loss : -0.6122 
+2025-11-16 12:32:42.014550: validation loss: -0.3493 
+2025-11-16 12:32:42.017449: Average global foreground Dice: [0.9153, 0.0601] 
+2025-11-16 12:32:42.019362: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:32:42.879380: lr: 0.007502 
+2025-11-16 12:32:42.882121: [W&B] Logged epoch 40 to WandB 
+2025-11-16 12:32:42.883586: [W&B] Epoch 40, continue_training=True, max_epochs=150 
+2025-11-16 12:32:42.884904: This epoch took 292.202012 s
+ 
+2025-11-16 12:32:42.886130: 
+epoch:  41 
+2025-11-16 12:37:17.084465: train loss : -0.6420 
+2025-11-16 12:37:34.501410: validation loss: -0.2777 
+2025-11-16 12:37:34.504193: Average global foreground Dice: [0.8963, 0.0254] 
+2025-11-16 12:37:34.506397: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:37:35.369911: lr: 0.00744 
+2025-11-16 12:37:35.372700: [W&B] Logged epoch 41 to WandB 
+2025-11-16 12:37:35.374065: [W&B] Epoch 41, continue_training=True, max_epochs=150 
+2025-11-16 12:37:35.375368: This epoch took 292.487644 s
+ 
+2025-11-16 12:37:35.376627: 
+epoch:  42 
+2025-11-16 12:42:09.514071: train loss : -0.6384 
+2025-11-16 12:42:26.981303: validation loss: -0.3992 
+2025-11-16 12:42:26.984552: Average global foreground Dice: [0.8995, 0.1261] 
+2025-11-16 12:42:26.986577: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:42:27.839242: lr: 0.007378 
+2025-11-16 12:42:28.151530: saving checkpoint... 
+2025-11-16 12:42:28.362548: done, saving took 0.52 seconds 
+2025-11-16 12:42:28.475867: [W&B] Logged epoch 42 to WandB 
+2025-11-16 12:42:28.478398: [W&B] Epoch 42, continue_training=True, max_epochs=150 
+2025-11-16 12:42:28.480044: This epoch took 293.101623 s
+ 
+2025-11-16 12:42:28.481920: 
+epoch:  43 
+2025-11-16 12:47:03.274574: train loss : -0.6532 
+2025-11-16 12:47:20.732955: validation loss: -0.3857 
+2025-11-16 12:47:20.735127: Average global foreground Dice: [0.9215, 0.0499] 
+2025-11-16 12:47:20.736969: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:47:21.361242: lr: 0.007316 
+2025-11-16 12:47:21.385433: saving checkpoint... 
+2025-11-16 12:47:21.622452: done, saving took 0.26 seconds 
+2025-11-16 12:47:21.628455: [W&B] Logged epoch 43 to WandB 
+2025-11-16 12:47:21.629944: [W&B] Epoch 43, continue_training=True, max_epochs=150 
+2025-11-16 12:47:21.631347: This epoch took 293.147113 s
+ 
+2025-11-16 12:47:21.632597: 
+epoch:  44 
+2025-11-16 12:51:55.694557: train loss : -0.6320 
+2025-11-16 12:52:13.116570: validation loss: -0.2803 
+2025-11-16 12:52:13.119426: Average global foreground Dice: [0.8663, 0.0368] 
+2025-11-16 12:52:13.121181: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:52:14.042510: lr: 0.007254 
+2025-11-16 12:52:14.046293: [W&B] Logged epoch 44 to WandB 
+2025-11-16 12:52:14.047804: [W&B] Epoch 44, continue_training=True, max_epochs=150 
+2025-11-16 12:52:14.049175: This epoch took 292.414450 s
+ 
+2025-11-16 12:52:14.050699: 
+epoch:  45 
+2025-11-16 12:56:48.581941: train loss : -0.6369 
+2025-11-16 12:57:06.013587: validation loss: -0.2709 
+2025-11-16 12:57:06.015756: Average global foreground Dice: [0.861, 0.0442] 
+2025-11-16 12:57:06.017739: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 12:57:06.887764: lr: 0.007192 
+2025-11-16 12:57:06.890702: [W&B] Logged epoch 45 to WandB 
+2025-11-16 12:57:06.892036: [W&B] Epoch 45, continue_training=True, max_epochs=150 
+2025-11-16 12:57:06.893297: This epoch took 292.840717 s
+ 
+2025-11-16 12:57:06.894553: 
+epoch:  46 
+2025-11-16 13:01:41.092984: train loss : -0.6580 
+2025-11-16 13:01:58.520075: validation loss: -0.4564 
+2025-11-16 13:01:58.523011: Average global foreground Dice: [0.9134, 0.0488] 
+2025-11-16 13:01:58.524965: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:01:59.392556: lr: 0.00713 
+2025-11-16 13:01:59.395863: [W&B] Logged epoch 46 to WandB 
+2025-11-16 13:01:59.397244: [W&B] Epoch 46, continue_training=True, max_epochs=150 
+2025-11-16 13:01:59.398628: This epoch took 292.502280 s
+ 
+2025-11-16 13:01:59.399924: 
+epoch:  47 
+2025-11-16 13:06:33.929790: train loss : -0.6638 
+2025-11-16 13:06:51.377451: validation loss: -0.3864 
+2025-11-16 13:06:51.380686: Average global foreground Dice: [0.9101, 0.0455] 
+2025-11-16 13:06:51.382569: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:06:56.650905: lr: 0.007067 
+2025-11-16 13:06:56.653748: [W&B] Logged epoch 47 to WandB 
+2025-11-16 13:06:56.655081: [W&B] Epoch 47, continue_training=True, max_epochs=150 
+2025-11-16 13:06:56.656357: This epoch took 297.254708 s
+ 
+2025-11-16 13:06:56.657642: 
+epoch:  48 
+2025-11-16 13:11:30.992107: train loss : -0.6553 
+2025-11-16 13:11:48.426250: validation loss: -0.3679 
+2025-11-16 13:11:48.428903: Average global foreground Dice: [0.896, 0.0412] 
+2025-11-16 13:11:48.430684: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:11:49.054816: lr: 0.007005 
+2025-11-16 13:11:49.057685: [W&B] Logged epoch 48 to WandB 
+2025-11-16 13:11:49.059184: [W&B] Epoch 48, continue_training=True, max_epochs=150 
+2025-11-16 13:11:49.060418: This epoch took 292.400988 s
+ 
+2025-11-16 13:11:49.061724: 
+epoch:  49 
+2025-11-16 13:16:23.679225: train loss : -0.6604 
+2025-11-16 13:16:41.129122: validation loss: -0.2556 
+2025-11-16 13:16:41.132122: Average global foreground Dice: [0.8955, 0.0297] 
+2025-11-16 13:16:41.134058: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:16:41.693772: lr: 0.006943 
+2025-11-16 13:16:41.696285: saving scheduled checkpoint file... 
+2025-11-16 13:16:42.017020: saving checkpoint... 
+2025-11-16 13:16:42.206609: done, saving took 0.51 seconds 
+2025-11-16 13:16:42.222396: done 
+2025-11-16 13:16:42.224184: [W&B] Logged epoch 49 to WandB 
+2025-11-16 13:16:42.225449: [W&B] Epoch 49, continue_training=True, max_epochs=150 
+2025-11-16 13:16:42.226613: This epoch took 293.163308 s
+ 
+2025-11-16 13:16:42.227860: 
+epoch:  50 
+2025-11-16 13:21:16.905500: train loss : -0.6560 
+2025-11-16 13:21:34.369840: validation loss: -0.3327 
+2025-11-16 13:21:34.372553: Average global foreground Dice: [0.9012, 0.0672] 
+2025-11-16 13:21:34.375639: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:21:35.325538: lr: 0.00688 
+2025-11-16 13:21:35.328202: [W&B] Logged epoch 50 to WandB 
+2025-11-16 13:21:35.329514: [W&B] Epoch 50, continue_training=True, max_epochs=150 
+2025-11-16 13:21:35.330983: This epoch took 293.101179 s
+ 
+2025-11-16 13:21:35.332145: 
+epoch:  51 
+2025-11-16 13:26:10.131473: train loss : -0.6642 
+2025-11-16 13:26:27.601481: validation loss: -0.3971 
+2025-11-16 13:26:27.604167: Average global foreground Dice: [0.8951, 0.0818] 
+2025-11-16 13:26:27.605928: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:26:28.518714: lr: 0.006817 
+2025-11-16 13:26:28.521426: [W&B] Logged epoch 51 to WandB 
+2025-11-16 13:26:28.522486: [W&B] Epoch 51, continue_training=True, max_epochs=150 
+2025-11-16 13:26:28.523505: This epoch took 293.189753 s
+ 
+2025-11-16 13:26:28.524497: 
+epoch:  52 
+2025-11-16 13:31:03.120225: train loss : -0.6653 
+2025-11-16 13:31:20.578090: validation loss: -0.3389 
+2025-11-16 13:31:20.581167: Average global foreground Dice: [0.91, 0.0457] 
+2025-11-16 13:31:20.583210: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:31:21.167858: lr: 0.006755 
+2025-11-16 13:31:21.170714: [W&B] Logged epoch 52 to WandB 
+2025-11-16 13:31:21.172292: [W&B] Epoch 52, continue_training=True, max_epochs=150 
+2025-11-16 13:31:21.173866: This epoch took 292.647646 s
+ 
+2025-11-16 13:31:21.175189: 
+epoch:  53 
+2025-11-16 13:35:55.828259: train loss : -0.6579 
+2025-11-16 13:36:13.298863: validation loss: -0.4650 
+2025-11-16 13:36:13.302119: Average global foreground Dice: [0.9406, 0.1293] 
+2025-11-16 13:36:13.304222: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:36:14.188162: lr: 0.006692 
+2025-11-16 13:36:14.494316: saving checkpoint... 
+2025-11-16 13:36:14.732061: done, saving took 0.54 seconds 
+2025-11-16 13:36:14.758883: [W&B] Logged epoch 53 to WandB 
+2025-11-16 13:36:14.760356: [W&B] Epoch 53, continue_training=True, max_epochs=150 
+2025-11-16 13:36:14.761701: This epoch took 293.584720 s
+ 
+2025-11-16 13:36:14.762848: 
+epoch:  54 
+2025-11-16 13:40:49.060902: train loss : -0.6350 
+2025-11-16 13:41:06.526350: validation loss: -0.3679 
+2025-11-16 13:41:06.529282: Average global foreground Dice: [0.9261, 0.0769] 
+2025-11-16 13:41:06.531300: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:41:07.371905: lr: 0.006629 
+2025-11-16 13:41:07.409704: saving checkpoint... 
+2025-11-16 13:41:07.642016: done, saving took 0.27 seconds 
+2025-11-16 13:41:07.647066: [W&B] Logged epoch 54 to WandB 
+2025-11-16 13:41:07.648584: [W&B] Epoch 54, continue_training=True, max_epochs=150 
+2025-11-16 13:41:07.649924: This epoch took 292.885402 s
+ 
+2025-11-16 13:41:07.651178: 
+epoch:  55 
+2025-11-16 13:45:42.243466: train loss : -0.6253 
+2025-11-16 13:45:59.686679: validation loss: -0.3985 
+2025-11-16 13:45:59.689411: Average global foreground Dice: [0.925, 0.0967] 
+2025-11-16 13:45:59.691852: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:46:00.513697: lr: 0.006566 
+2025-11-16 13:46:00.564130: saving checkpoint... 
+2025-11-16 13:46:00.822401: done, saving took 0.31 seconds 
+2025-11-16 13:46:00.826978: [W&B] Logged epoch 55 to WandB 
+2025-11-16 13:46:00.828245: [W&B] Epoch 55, continue_training=True, max_epochs=150 
+2025-11-16 13:46:00.829545: This epoch took 293.176475 s
+ 
+2025-11-16 13:46:00.830885: 
+epoch:  56 
+2025-11-16 13:50:35.250264: train loss : -0.6540 
+2025-11-16 13:50:52.702658: validation loss: -0.3524 
+2025-11-16 13:50:52.705451: Average global foreground Dice: [0.8953, 0.0685] 
+2025-11-16 13:50:52.707429: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:50:53.572630: lr: 0.006504 
+2025-11-16 13:50:53.576187: [W&B] Logged epoch 56 to WandB 
+2025-11-16 13:50:53.577952: [W&B] Epoch 56, continue_training=True, max_epochs=150 
+2025-11-16 13:50:53.579870: This epoch took 292.747464 s
+ 
+2025-11-16 13:50:53.581635: 
+epoch:  57 
+2025-11-16 13:55:32.495711: train loss : -0.6897 
+2025-11-16 13:55:49.988609: validation loss: -0.4551 
+2025-11-16 13:55:49.991666: Average global foreground Dice: [0.9285, 0.0602] 
+2025-11-16 13:55:49.993642: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 13:55:50.923949: lr: 0.006441 
+2025-11-16 13:55:51.242565: saving checkpoint... 
+2025-11-16 13:55:51.498104: done, saving took 0.57 seconds 
+2025-11-16 13:55:51.503003: [W&B] Logged epoch 57 to WandB 
+2025-11-16 13:55:51.504344: [W&B] Epoch 57, continue_training=True, max_epochs=150 
+2025-11-16 13:55:51.505650: This epoch took 297.921977 s
+ 
+2025-11-16 13:55:51.506724: 
+epoch:  58 
+2025-11-16 14:00:25.740577: train loss : -0.6568 
+2025-11-16 14:00:43.161793: validation loss: -0.3119 
+2025-11-16 14:00:43.164966: Average global foreground Dice: [0.8989, 0.0395] 
+2025-11-16 14:00:43.167114: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:00:44.019577: lr: 0.006378 
+2025-11-16 14:00:44.022648: [W&B] Logged epoch 58 to WandB 
+2025-11-16 14:00:44.023916: [W&B] Epoch 58, continue_training=True, max_epochs=150 
+2025-11-16 14:00:44.025208: This epoch took 292.516989 s
+ 
+2025-11-16 14:00:44.026637: 
+epoch:  59 
+2025-11-16 14:05:18.780455: train loss : -0.6596 
+2025-11-16 14:05:36.231499: validation loss: -0.3649 
+2025-11-16 14:05:36.247129: Average global foreground Dice: [0.9062, 0.0218] 
+2025-11-16 14:05:36.250354: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:05:37.240771: lr: 0.006314 
+2025-11-16 14:05:37.243587: [W&B] Logged epoch 59 to WandB 
+2025-11-16 14:05:37.245877: [W&B] Epoch 59, continue_training=True, max_epochs=150 
+2025-11-16 14:05:37.248419: This epoch took 293.219820 s
+ 
+2025-11-16 14:05:37.251019: 
+epoch:  60 
+2025-11-16 14:10:11.377620: train loss : -0.6718 
+2025-11-16 14:10:28.810033: validation loss: -0.3198 
+2025-11-16 14:10:28.812255: Average global foreground Dice: [0.904, 0.0668] 
+2025-11-16 14:10:28.814257: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:10:29.832013: lr: 0.006251 
+2025-11-16 14:10:29.835034: [W&B] Logged epoch 60 to WandB 
+2025-11-16 14:10:29.836349: [W&B] Epoch 60, continue_training=True, max_epochs=150 
+2025-11-16 14:10:29.837624: This epoch took 292.583136 s
+ 
+2025-11-16 14:10:29.838899: 
+epoch:  61 
+2025-11-16 14:15:04.621718: train loss : -0.6838 
+2025-11-16 14:15:22.087786: validation loss: -0.3324 
+2025-11-16 14:15:22.091516: Average global foreground Dice: [0.8883, 0.0317] 
+2025-11-16 14:15:22.093683: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:15:23.044581: lr: 0.006188 
+2025-11-16 14:15:23.047274: [W&B] Logged epoch 61 to WandB 
+2025-11-16 14:15:23.048492: [W&B] Epoch 61, continue_training=True, max_epochs=150 
+2025-11-16 14:15:23.049684: This epoch took 293.208955 s
+ 
+2025-11-16 14:15:23.050974: 
+epoch:  62 
+2025-11-16 14:19:57.208159: train loss : -0.6586 
+2025-11-16 14:20:14.668845: validation loss: -0.3831 
+2025-11-16 14:20:14.672272: Average global foreground Dice: [0.917, 0.0849] 
+2025-11-16 14:20:14.675276: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:20:15.652404: lr: 0.006125 
+2025-11-16 14:20:15.655259: [W&B] Logged epoch 62 to WandB 
+2025-11-16 14:20:15.656446: [W&B] Epoch 62, continue_training=True, max_epochs=150 
+2025-11-16 14:20:15.657623: This epoch took 292.604409 s
+ 
+2025-11-16 14:20:15.658855: 
+epoch:  63 
+2025-11-16 14:24:50.078742: train loss : -0.6854 
+2025-11-16 14:25:07.552648: validation loss: -0.3707 
+2025-11-16 14:25:07.555400: Average global foreground Dice: [0.9007, 0.0331] 
+2025-11-16 14:25:07.557444: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:25:08.464664: lr: 0.006061 
+2025-11-16 14:25:08.467543: [W&B] Logged epoch 63 to WandB 
+2025-11-16 14:25:08.468817: [W&B] Epoch 63, continue_training=True, max_epochs=150 
+2025-11-16 14:25:08.470109: This epoch took 292.809372 s
+ 
+2025-11-16 14:25:08.471420: 
+epoch:  64 
+2025-11-16 14:29:42.717955: train loss : -0.6792 
+2025-11-16 14:30:00.131247: validation loss: -0.4740 
+2025-11-16 14:30:00.133245: Average global foreground Dice: [0.9379, 0.2601] 
+2025-11-16 14:30:00.134880: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:30:00.826812: lr: 0.005998 
+2025-11-16 14:30:01.155660: saving checkpoint... 
+2025-11-16 14:30:01.419501: done, saving took 0.59 seconds 
+2025-11-16 14:30:01.445836: [W&B] Logged epoch 64 to WandB 
+2025-11-16 14:30:01.447243: [W&B] Epoch 64, continue_training=True, max_epochs=150 
+2025-11-16 14:30:01.448497: This epoch took 292.975116 s
+ 
+2025-11-16 14:30:01.449742: 
+epoch:  65 
+2025-11-16 14:34:35.795255: train loss : -0.6685 
+2025-11-16 14:34:53.248740: validation loss: -0.5007 
+2025-11-16 14:34:53.251674: Average global foreground Dice: [0.933, 0.0503] 
+2025-11-16 14:34:53.253367: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:34:53.829942: lr: 0.005934 
+2025-11-16 14:34:53.832928: [W&B] Logged epoch 65 to WandB 
+2025-11-16 14:34:53.834108: [W&B] Epoch 65, continue_training=True, max_epochs=150 
+2025-11-16 14:34:53.835353: This epoch took 292.383760 s
+ 
+2025-11-16 14:34:53.836518: 
+epoch:  66 
+2025-11-16 14:39:32.394247: train loss : -0.6798 
+2025-11-16 14:39:49.834106: validation loss: -0.4031 
+2025-11-16 14:39:49.837220: Average global foreground Dice: [0.9111, 0.0444] 
+2025-11-16 14:39:49.839347: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:39:50.651922: lr: 0.005871 
+2025-11-16 14:39:50.654683: [W&B] Logged epoch 66 to WandB 
+2025-11-16 14:39:50.655931: [W&B] Epoch 66, continue_training=True, max_epochs=150 
+2025-11-16 14:39:50.657162: This epoch took 296.819074 s
+ 
+2025-11-16 14:39:50.658470: 
+epoch:  67 
+2025-11-16 14:44:24.974506: train loss : -0.7025 
+2025-11-16 14:44:42.436053: validation loss: -0.3477 
+2025-11-16 14:44:42.438602: Average global foreground Dice: [0.9131, 0.0615] 
+2025-11-16 14:44:42.440444: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:44:43.014392: lr: 0.005807 
+2025-11-16 14:44:43.017146: [W&B] Logged epoch 67 to WandB 
+2025-11-16 14:44:43.018649: [W&B] Epoch 67, continue_training=True, max_epochs=150 
+2025-11-16 14:44:43.019817: This epoch took 292.359740 s
+ 
+2025-11-16 14:44:43.021036: 
+epoch:  68 
+2025-11-16 14:49:17.213424: train loss : -0.7026 
+2025-11-16 14:49:34.661132: validation loss: -0.5066 
+2025-11-16 14:49:34.664175: Average global foreground Dice: [0.9354, 0.1313] 
+2025-11-16 14:49:34.666036: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:49:35.496762: lr: 0.005743 
+2025-11-16 14:49:35.670644: saving checkpoint... 
+2025-11-16 14:49:35.820443: done, saving took 0.32 seconds 
+2025-11-16 14:49:35.826515: [W&B] Logged epoch 68 to WandB 
+2025-11-16 14:49:35.828017: [W&B] Epoch 68, continue_training=True, max_epochs=150 
+2025-11-16 14:49:35.829525: This epoch took 292.806269 s
+ 
+2025-11-16 14:49:35.830962: 
+epoch:  69 
+2025-11-16 14:54:10.788679: train loss : -0.6933 
+2025-11-16 14:54:28.245963: validation loss: -0.4040 
+2025-11-16 14:54:28.249841: Average global foreground Dice: [0.911, 0.0389] 
+2025-11-16 14:54:28.251802: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:54:29.206374: lr: 0.005679 
+2025-11-16 14:54:29.209231: [W&B] Logged epoch 69 to WandB 
+2025-11-16 14:54:29.210711: [W&B] Epoch 69, continue_training=True, max_epochs=150 
+2025-11-16 14:54:29.211994: This epoch took 293.378618 s
+ 
+2025-11-16 14:54:29.213172: 
+epoch:  70 
+2025-11-16 14:59:03.771872: train loss : -0.6935 
+2025-11-16 14:59:21.210146: validation loss: -0.2533 
+2025-11-16 14:59:21.212651: Average global foreground Dice: [0.8925, 0.0408] 
+2025-11-16 14:59:21.214601: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 14:59:22.054433: lr: 0.005615 
+2025-11-16 14:59:22.057660: [W&B] Logged epoch 70 to WandB 
+2025-11-16 14:59:22.059115: [W&B] Epoch 70, continue_training=True, max_epochs=150 
+2025-11-16 14:59:22.060634: This epoch took 292.845901 s
+ 
+2025-11-16 14:59:22.061951: 
+epoch:  71 
+2025-11-16 15:03:56.862010: train loss : -0.6990 
+2025-11-16 15:04:14.285437: validation loss: -0.3558 
+2025-11-16 15:04:14.288780: Average global foreground Dice: [0.9133, 0.0357] 
+2025-11-16 15:04:14.290933: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:04:15.170226: lr: 0.005551 
+2025-11-16 15:04:15.173026: [W&B] Logged epoch 71 to WandB 
+2025-11-16 15:04:15.174435: [W&B] Epoch 71, continue_training=True, max_epochs=150 
+2025-11-16 15:04:15.175813: This epoch took 293.112112 s
+ 
+2025-11-16 15:04:15.177023: 
+epoch:  72 
+2025-11-16 15:08:49.488185: train loss : -0.7114 
+2025-11-16 15:09:06.947770: validation loss: -0.4359 
+2025-11-16 15:09:06.950677: Average global foreground Dice: [0.9253, 0.0764] 
+2025-11-16 15:09:06.952680: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:09:07.794685: lr: 0.005487 
+2025-11-16 15:09:07.798086: [W&B] Logged epoch 72 to WandB 
+2025-11-16 15:09:07.799465: [W&B] Epoch 72, continue_training=True, max_epochs=150 
+2025-11-16 15:09:07.800778: This epoch took 292.621510 s
+ 
+2025-11-16 15:09:07.802264: 
+epoch:  73 
+2025-11-16 15:13:42.170342: train loss : -0.7001 
+2025-11-16 15:13:59.626623: validation loss: -0.2744 
+2025-11-16 15:13:59.629485: Average global foreground Dice: [0.875, 0.0443] 
+2025-11-16 15:13:59.631353: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:14:00.505701: lr: 0.005423 
+2025-11-16 15:14:00.508743: [W&B] Logged epoch 73 to WandB 
+2025-11-16 15:14:00.510150: [W&B] Epoch 73, continue_training=True, max_epochs=150 
+2025-11-16 15:14:00.511637: This epoch took 292.707753 s
+ 
+2025-11-16 15:14:00.512917: 
+epoch:  74 
+2025-11-16 15:18:34.448166: train loss : -0.6973 
+2025-11-16 15:18:51.887753: validation loss: -0.1825 
+2025-11-16 15:18:51.890904: Average global foreground Dice: [0.8521, 0.0395] 
+2025-11-16 15:18:51.892980: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:18:52.464224: lr: 0.005359 
+2025-11-16 15:18:52.466845: [W&B] Logged epoch 74 to WandB 
+2025-11-16 15:18:52.468135: [W&B] Epoch 74, continue_training=True, max_epochs=150 
+2025-11-16 15:18:52.469279: This epoch took 291.954575 s
+ 
+2025-11-16 15:18:52.470578: 
+epoch:  75 
+2025-11-16 15:23:26.521090: train loss : -0.6839 
+2025-11-16 15:23:43.946600: validation loss: -0.4402 
+2025-11-16 15:23:43.949405: Average global foreground Dice: [0.9102, 0.021] 
+2025-11-16 15:23:43.951437: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:23:44.568516: lr: 0.005295 
+2025-11-16 15:23:44.571225: [W&B] Logged epoch 75 to WandB 
+2025-11-16 15:23:44.572989: [W&B] Epoch 75, continue_training=True, max_epochs=150 
+2025-11-16 15:23:44.574643: This epoch took 292.102204 s
+ 
+2025-11-16 15:23:44.576097: 
+epoch:  76 
+2025-11-16 15:28:22.588552: train loss : -0.7134 
+2025-11-16 15:28:40.035222: validation loss: -0.3870 
+2025-11-16 15:28:40.037416: Average global foreground Dice: [0.9237, 0.0328] 
+2025-11-16 15:28:40.039784: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:28:40.913744: lr: 0.00523 
+2025-11-16 15:28:40.916873: [W&B] Logged epoch 76 to WandB 
+2025-11-16 15:28:40.918230: [W&B] Epoch 76, continue_training=True, max_epochs=150 
+2025-11-16 15:28:40.919616: This epoch took 296.341814 s
+ 
+2025-11-16 15:28:40.921111: 
+epoch:  77 
+2025-11-16 15:33:14.894437: train loss : -0.7135 
+2025-11-16 15:33:32.368241: validation loss: -0.3368 
+2025-11-16 15:33:32.372361: Average global foreground Dice: [0.9077, 0.0475] 
+2025-11-16 15:33:32.375411: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:33:33.333810: lr: 0.005166 
+2025-11-16 15:33:33.336603: [W&B] Logged epoch 77 to WandB 
+2025-11-16 15:33:33.337897: [W&B] Epoch 77, continue_training=True, max_epochs=150 
+2025-11-16 15:33:33.339235: This epoch took 292.416204 s
+ 
+2025-11-16 15:33:33.340374: 
+epoch:  78 
+2025-11-16 15:38:07.485339: train loss : -0.6916 
+2025-11-16 15:38:24.917874: validation loss: -0.4065 
+2025-11-16 15:38:24.949654: Average global foreground Dice: [0.9095, 0.0241] 
+2025-11-16 15:38:24.952514: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:38:25.626053: lr: 0.005101 
+2025-11-16 15:38:25.629477: [W&B] Logged epoch 78 to WandB 
+2025-11-16 15:38:25.631394: [W&B] Epoch 78, continue_training=True, max_epochs=150 
+2025-11-16 15:38:25.632753: This epoch took 292.290878 s
+ 
+2025-11-16 15:38:25.634181: 
+epoch:  79 
+2025-11-16 15:42:59.994615: train loss : -0.6824 
+2025-11-16 15:43:17.424001: validation loss: -0.3004 
+2025-11-16 15:43:17.448764: Average global foreground Dice: [0.8904, 0.0214] 
+2025-11-16 15:43:17.451464: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:43:18.429252: lr: 0.005036 
+2025-11-16 15:43:18.432009: [W&B] Logged epoch 79 to WandB 
+2025-11-16 15:43:18.433292: [W&B] Epoch 79, continue_training=True, max_epochs=150 
+2025-11-16 15:43:18.434501: This epoch took 292.798713 s
+ 
+2025-11-16 15:43:18.435821: 
+epoch:  80 
+2025-11-16 15:47:52.497996: train loss : -0.6798 
+2025-11-16 15:48:09.941937: validation loss: -0.4784 
+2025-11-16 15:48:09.944988: Average global foreground Dice: [0.9419, 0.1168] 
+2025-11-16 15:48:09.947370: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:48:10.860246: lr: 0.004971 
+2025-11-16 15:48:10.863126: [W&B] Logged epoch 80 to WandB 
+2025-11-16 15:48:10.864556: [W&B] Epoch 80, continue_training=True, max_epochs=150 
+2025-11-16 15:48:10.865711: This epoch took 292.428198 s
+ 
+2025-11-16 15:48:10.866821: 
+epoch:  81 
+2025-11-16 15:52:45.115386: train loss : -0.6745 
+2025-11-16 15:53:02.575537: validation loss: -0.5425 
+2025-11-16 15:53:02.578364: Average global foreground Dice: [0.9549, 0.0877] 
+2025-11-16 15:53:02.581036: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:53:03.558228: lr: 0.004907 
+2025-11-16 15:53:03.561719: [W&B] Logged epoch 81 to WandB 
+2025-11-16 15:53:03.564431: [W&B] Epoch 81, continue_training=True, max_epochs=150 
+2025-11-16 15:53:03.566613: This epoch took 292.698254 s
+ 
+2025-11-16 15:53:03.568664: 
+epoch:  82 
+2025-11-16 15:57:38.056079: train loss : -0.6883 
+2025-11-16 15:57:55.509715: validation loss: -0.4739 
+2025-11-16 15:57:55.512366: Average global foreground Dice: [0.9336, 0.0603] 
+2025-11-16 15:57:55.513945: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 15:57:56.439549: lr: 0.004842 
+2025-11-16 15:57:56.442527: [W&B] Logged epoch 82 to WandB 
+2025-11-16 15:57:56.443828: [W&B] Epoch 82, continue_training=True, max_epochs=150 
+2025-11-16 15:57:56.445254: This epoch took 292.873962 s
+ 
+2025-11-16 15:57:56.446510: 
+epoch:  83 
+2025-11-16 16:02:31.091096: train loss : -0.6971 
+2025-11-16 16:02:48.537070: validation loss: -0.5455 
+2025-11-16 16:02:48.539881: Average global foreground Dice: [0.9483, 0.2732] 
+2025-11-16 16:02:48.541701: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:02:49.121742: lr: 0.004776 
+2025-11-16 16:02:49.431842: saving checkpoint... 
+2025-11-16 16:02:49.698103: done, saving took 0.57 seconds 
+2025-11-16 16:02:49.794656: [W&B] Logged epoch 83 to WandB 
+2025-11-16 16:02:49.796162: [W&B] Epoch 83, continue_training=True, max_epochs=150 
+2025-11-16 16:02:49.797454: This epoch took 293.349069 s
+ 
+2025-11-16 16:02:49.798752: 
+epoch:  84 
+2025-11-16 16:07:23.874631: train loss : -0.6957 
+2025-11-16 16:07:41.324313: validation loss: -0.4345 
+2025-11-16 16:07:41.326709: Average global foreground Dice: [0.9272, 0.0358] 
+2025-11-16 16:07:41.328604: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:07:42.163711: lr: 0.004711 
+2025-11-16 16:07:42.166781: [W&B] Logged epoch 84 to WandB 
+2025-11-16 16:07:42.168095: [W&B] Epoch 84, continue_training=True, max_epochs=150 
+2025-11-16 16:07:42.169513: This epoch took 292.368927 s
+ 
+2025-11-16 16:07:42.170929: 
+epoch:  85 
+2025-11-16 16:12:16.409865: train loss : -0.7057 
+2025-11-16 16:12:33.866082: validation loss: -0.4245 
+2025-11-16 16:12:33.868689: Average global foreground Dice: [0.9293, 0.0633] 
+2025-11-16 16:12:33.872655: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:12:34.876016: lr: 0.004646 
+2025-11-16 16:12:34.879026: [W&B] Logged epoch 85 to WandB 
+2025-11-16 16:12:34.880402: [W&B] Epoch 85, continue_training=True, max_epochs=150 
+2025-11-16 16:12:34.882008: This epoch took 292.709217 s
+ 
+2025-11-16 16:12:34.883459: 
+epoch:  86 
+2025-11-16 16:17:13.235718: train loss : -0.6862 
+2025-11-16 16:17:30.674035: validation loss: -0.4647 
+2025-11-16 16:17:30.676098: Average global foreground Dice: [0.9283, 0.1552] 
+2025-11-16 16:17:30.677849: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:17:31.546466: lr: 0.004581 
+2025-11-16 16:17:31.629765: saving checkpoint... 
+2025-11-16 16:17:31.885562: done, saving took 0.34 seconds 
+2025-11-16 16:17:31.890624: [W&B] Logged epoch 86 to WandB 
+2025-11-16 16:17:31.891888: [W&B] Epoch 86, continue_training=True, max_epochs=150 
+2025-11-16 16:17:31.893152: This epoch took 297.008165 s
+ 
+2025-11-16 16:17:31.894230: 
+epoch:  87 
+2025-11-16 16:22:06.210231: train loss : -0.7217 
+2025-11-16 16:22:23.670751: validation loss: -0.3987 
+2025-11-16 16:22:23.672972: Average global foreground Dice: [0.9123, 0.0269] 
+2025-11-16 16:22:23.675943: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:22:24.333565: lr: 0.004515 
+2025-11-16 16:22:24.348238: [W&B] Logged epoch 87 to WandB 
+2025-11-16 16:22:24.350374: [W&B] Epoch 87, continue_training=True, max_epochs=150 
+2025-11-16 16:22:24.351829: This epoch took 292.456075 s
+ 
+2025-11-16 16:22:24.353471: 
+epoch:  88 
+2025-11-16 16:26:58.119847: train loss : -0.7184 
+2025-11-16 16:27:15.565863: validation loss: -0.5296 
+2025-11-16 16:27:15.570244: Average global foreground Dice: [0.9412, 0.1053] 
+2025-11-16 16:27:15.572284: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:27:16.455625: lr: 0.00445 
+2025-11-16 16:27:16.458571: [W&B] Logged epoch 88 to WandB 
+2025-11-16 16:27:16.459819: [W&B] Epoch 88, continue_training=True, max_epochs=150 
+2025-11-16 16:27:16.461006: This epoch took 292.105538 s
+ 
+2025-11-16 16:27:16.462302: 
+epoch:  89 
+2025-11-16 16:31:50.497490: train loss : -0.7221 
+2025-11-16 16:32:07.936338: validation loss: -0.3527 
+2025-11-16 16:32:07.938306: Average global foreground Dice: [0.911, 0.0584] 
+2025-11-16 16:32:07.939965: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:32:08.947399: lr: 0.004384 
+2025-11-16 16:32:08.952923: [W&B] Logged epoch 89 to WandB 
+2025-11-16 16:32:08.955318: [W&B] Epoch 89, continue_training=True, max_epochs=150 
+2025-11-16 16:32:08.962657: This epoch took 292.498703 s
+ 
+2025-11-16 16:32:08.964908: 
+epoch:  90 
+2025-11-16 16:36:42.838535: train loss : -0.6898 
+2025-11-16 16:37:00.287873: validation loss: -0.3646 
+2025-11-16 16:37:00.290170: Average global foreground Dice: [0.9069, 0.0421] 
+2025-11-16 16:37:00.292056: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:37:01.232100: lr: 0.004318 
+2025-11-16 16:37:01.234844: [W&B] Logged epoch 90 to WandB 
+2025-11-16 16:37:01.236050: [W&B] Epoch 90, continue_training=True, max_epochs=150 
+2025-11-16 16:37:01.237212: This epoch took 292.267951 s
+ 
+2025-11-16 16:37:01.238460: 
+epoch:  91 
+2025-11-16 16:41:35.430158: train loss : -0.7360 
+2025-11-16 16:41:52.912389: validation loss: -0.1750 
+2025-11-16 16:41:52.914963: Average global foreground Dice: [0.8637, 0.0247] 
+2025-11-16 16:41:52.916734: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:41:53.894737: lr: 0.004252 
+2025-11-16 16:41:53.898194: [W&B] Logged epoch 91 to WandB 
+2025-11-16 16:41:53.899480: [W&B] Epoch 91, continue_training=True, max_epochs=150 
+2025-11-16 16:41:53.900845: This epoch took 292.660734 s
+ 
+2025-11-16 16:41:53.902047: 
+epoch:  92 
+2025-11-16 16:46:28.069734: train loss : -0.7237 
+2025-11-16 16:46:45.523111: validation loss: -0.3286 
+2025-11-16 16:46:45.525161: Average global foreground Dice: [0.9084, 0.0309] 
+2025-11-16 16:46:45.526811: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:46:46.462465: lr: 0.004186 
+2025-11-16 16:46:46.465454: [W&B] Logged epoch 92 to WandB 
+2025-11-16 16:46:46.466707: [W&B] Epoch 92, continue_training=True, max_epochs=150 
+2025-11-16 16:46:46.468012: This epoch took 292.564167 s
+ 
+2025-11-16 16:46:46.469246: 
+epoch:  93 
+2025-11-16 16:51:21.246745: train loss : -0.7081 
+2025-11-16 16:51:38.681686: validation loss: -0.4766 
+2025-11-16 16:51:38.683861: Average global foreground Dice: [0.9337, 0.0449] 
+2025-11-16 16:51:38.685642: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:51:39.642188: lr: 0.00412 
+2025-11-16 16:51:39.645193: [W&B] Logged epoch 93 to WandB 
+2025-11-16 16:51:39.647379: [W&B] Epoch 93, continue_training=True, max_epochs=150 
+2025-11-16 16:51:39.648988: This epoch took 293.178019 s
+ 
+2025-11-16 16:51:39.650874: 
+epoch:  94 
+2025-11-16 16:56:13.849640: train loss : -0.7233 
+2025-11-16 16:56:31.299571: validation loss: -0.4530 
+2025-11-16 16:56:31.302205: Average global foreground Dice: [0.9078, 0.0544] 
+2025-11-16 16:56:31.304225: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 16:56:32.180079: lr: 0.004054 
+2025-11-16 16:56:32.183149: [W&B] Logged epoch 94 to WandB 
+2025-11-16 16:56:32.184593: [W&B] Epoch 94, continue_training=True, max_epochs=150 
+2025-11-16 16:56:32.185931: This epoch took 292.531972 s
+ 
+2025-11-16 16:56:32.187334: 
+epoch:  95 
+2025-11-16 17:01:06.690529: train loss : -0.7410 
+2025-11-16 17:01:24.166038: validation loss: -0.4225 
+2025-11-16 17:01:24.168833: Average global foreground Dice: [0.9227, 0.0691] 
+2025-11-16 17:01:24.170922: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:01:29.439312: lr: 0.003987 
+2025-11-16 17:01:29.442018: [W&B] Logged epoch 95 to WandB 
+2025-11-16 17:01:29.443281: [W&B] Epoch 95, continue_training=True, max_epochs=150 
+2025-11-16 17:01:29.444575: This epoch took 297.255521 s
+ 
+2025-11-16 17:01:29.446548: 
+epoch:  96 
+2025-11-16 17:06:03.773292: train loss : -0.7181 
+2025-11-16 17:06:21.242766: validation loss: -0.4448 
+2025-11-16 17:06:21.245268: Average global foreground Dice: [0.9306, 0.0791] 
+2025-11-16 17:06:21.247273: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:06:21.846246: lr: 0.003921 
+2025-11-16 17:06:21.848770: [W&B] Logged epoch 96 to WandB 
+2025-11-16 17:06:21.850003: [W&B] Epoch 96, continue_training=True, max_epochs=150 
+2025-11-16 17:06:21.851201: This epoch took 292.400682 s
+ 
+2025-11-16 17:06:21.852566: 
+epoch:  97 
+2025-11-16 17:10:56.141893: train loss : -0.7282 
+2025-11-16 17:11:13.580117: validation loss: -0.3964 
+2025-11-16 17:11:13.582977: Average global foreground Dice: [0.9012, 0.105] 
+2025-11-16 17:11:13.584774: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:11:14.437265: lr: 0.003854 
+2025-11-16 17:11:14.440059: [W&B] Logged epoch 97 to WandB 
+2025-11-16 17:11:14.441438: [W&B] Epoch 97, continue_training=True, max_epochs=150 
+2025-11-16 17:11:14.442719: This epoch took 292.588128 s
+ 
+2025-11-16 17:11:14.444144: 
+epoch:  98 
+2025-11-16 17:15:48.698758: train loss : -0.7223 
+2025-11-16 17:16:06.166854: validation loss: -0.3980 
+2025-11-16 17:16:06.169840: Average global foreground Dice: [0.9074, 0.048] 
+2025-11-16 17:16:06.171741: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:16:07.031540: lr: 0.003787 
+2025-11-16 17:16:07.034261: [W&B] Logged epoch 98 to WandB 
+2025-11-16 17:16:07.035733: [W&B] Epoch 98, continue_training=True, max_epochs=150 
+2025-11-16 17:16:07.037002: This epoch took 292.590888 s
+ 
+2025-11-16 17:16:07.038265: 
+epoch:  99 
+2025-11-16 17:20:41.568417: train loss : -0.7206 
+2025-11-16 17:20:59.014347: validation loss: -0.4204 
+2025-11-16 17:20:59.017619: Average global foreground Dice: [0.9095, 0.0604] 
+2025-11-16 17:20:59.019704: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:20:59.923288: lr: 0.00372 
+2025-11-16 17:20:59.925725: saving scheduled checkpoint file... 
+2025-11-16 17:21:00.238969: saving checkpoint... 
+2025-11-16 17:21:00.544975: done, saving took 0.62 seconds 
+2025-11-16 17:21:00.595312: done 
+2025-11-16 17:21:00.597444: [W&B] Logged epoch 99 to WandB 
+2025-11-16 17:21:00.598620: [W&B] Epoch 99, continue_training=True, max_epochs=150 
+2025-11-16 17:21:00.599881: This epoch took 293.559580 s
+ 
+2025-11-16 17:21:00.601048: 
+epoch:  100 
+2025-11-16 17:25:34.845720: train loss : -0.7154 
+2025-11-16 17:25:52.301918: validation loss: -0.4228 
+2025-11-16 17:25:52.305181: Average global foreground Dice: [0.9162, 0.0637] 
+2025-11-16 17:25:52.306919: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:25:53.187716: lr: 0.003653 
+2025-11-16 17:25:53.190727: [W&B] Logged epoch 100 to WandB 
+2025-11-16 17:25:53.191995: [W&B] Epoch 100, continue_training=True, max_epochs=150 
+2025-11-16 17:25:53.193072: This epoch took 292.590212 s
+ 
+2025-11-16 17:25:53.194595: 
+epoch:  101 
+2025-11-16 17:30:27.719159: train loss : -0.7390 
+2025-11-16 17:30:45.160942: validation loss: -0.3316 
+2025-11-16 17:30:45.163938: Average global foreground Dice: [0.923, 0.0711] 
+2025-11-16 17:30:45.165971: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:30:46.043507: lr: 0.003586 
+2025-11-16 17:30:46.048609: [W&B] Logged epoch 101 to WandB 
+2025-11-16 17:30:46.050125: [W&B] Epoch 101, continue_training=True, max_epochs=150 
+2025-11-16 17:30:46.051384: This epoch took 292.854993 s
+ 
+2025-11-16 17:30:46.052555: 
+epoch:  102 
+2025-11-16 17:35:20.262813: train loss : -0.7290 
+2025-11-16 17:35:37.712232: validation loss: -0.4614 
+2025-11-16 17:35:37.714997: Average global foreground Dice: [0.9455, 0.1056] 
+2025-11-16 17:35:37.717111: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:35:38.642582: lr: 0.003519 
+2025-11-16 17:35:38.646301: [W&B] Logged epoch 102 to WandB 
+2025-11-16 17:35:38.648784: [W&B] Epoch 102, continue_training=True, max_epochs=150 
+2025-11-16 17:35:38.651067: This epoch took 292.594512 s
+ 
+2025-11-16 17:35:38.652622: 
+epoch:  103 
+2025-11-16 17:40:13.325077: train loss : -0.7484 
+2025-11-16 17:40:30.757614: validation loss: -0.5267 
+2025-11-16 17:40:30.759613: Average global foreground Dice: [0.9572, 0.2072] 
+2025-11-16 17:40:30.761355: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:40:31.698894: lr: 0.003451 
+2025-11-16 17:40:32.007131: saving checkpoint... 
+2025-11-16 17:40:32.185601: done, saving took 0.48 seconds 
+2025-11-16 17:40:32.224879: [W&B] Logged epoch 103 to WandB 
+2025-11-16 17:40:32.226885: [W&B] Epoch 103, continue_training=True, max_epochs=150 
+2025-11-16 17:40:32.228114: This epoch took 293.572410 s
+ 
+2025-11-16 17:40:32.229291: 
+epoch:  104 
+2025-11-16 17:45:06.615388: train loss : -0.7337 
+2025-11-16 17:45:24.062391: validation loss: -0.4957 
+2025-11-16 17:45:24.065565: Average global foreground Dice: [0.945, 0.0728] 
+2025-11-16 17:45:24.069377: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:45:24.729371: lr: 0.003384 
+2025-11-16 17:45:24.948447: saving checkpoint... 
+2025-11-16 17:45:25.157811: done, saving took 0.43 seconds 
+2025-11-16 17:45:25.172019: [W&B] Logged epoch 104 to WandB 
+2025-11-16 17:45:25.174884: [W&B] Epoch 104, continue_training=True, max_epochs=150 
+2025-11-16 17:45:25.176534: This epoch took 292.945642 s
+ 
+2025-11-16 17:45:25.177880: 
+epoch:  105 
+2025-11-16 17:50:04.184074: train loss : -0.7118 
+2025-11-16 17:50:21.632493: validation loss: -0.4640 
+2025-11-16 17:50:21.635124: Average global foreground Dice: [0.9332, 0.0756] 
+2025-11-16 17:50:21.636975: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:50:22.232607: lr: 0.003316 
+2025-11-16 17:50:22.481515: saving checkpoint... 
+2025-11-16 17:50:22.800835: done, saving took 0.57 seconds 
+2025-11-16 17:50:22.806632: [W&B] Logged epoch 105 to WandB 
+2025-11-16 17:50:22.808265: [W&B] Epoch 105, continue_training=True, max_epochs=150 
+2025-11-16 17:50:22.809769: This epoch took 297.630371 s
+ 
+2025-11-16 17:50:22.811859: 
+epoch:  106 
+2025-11-16 17:54:56.654987: train loss : -0.7336 
+2025-11-16 17:55:14.082734: validation loss: -0.3954 
+2025-11-16 17:55:14.085273: Average global foreground Dice: [0.9101, 0.0374] 
+2025-11-16 17:55:14.087288: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 17:55:15.014747: lr: 0.003248 
+2025-11-16 17:55:15.017415: [W&B] Logged epoch 106 to WandB 
+2025-11-16 17:55:15.018698: [W&B] Epoch 106, continue_training=True, max_epochs=150 
+2025-11-16 17:55:15.020213: This epoch took 292.206338 s
+ 
+2025-11-16 17:55:15.021507: 
+epoch:  107 
+2025-11-16 17:59:49.126700: train loss : -0.7267 
+2025-11-16 18:00:06.574827: validation loss: -0.4182 
+2025-11-16 18:00:06.577795: Average global foreground Dice: [0.9081, 0.0522] 
+2025-11-16 18:00:06.579859: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:00:07.465601: lr: 0.00318 
+2025-11-16 18:00:07.468636: [W&B] Logged epoch 107 to WandB 
+2025-11-16 18:00:07.470000: [W&B] Epoch 107, continue_training=True, max_epochs=150 
+2025-11-16 18:00:07.471254: This epoch took 292.448006 s
+ 
+2025-11-16 18:00:07.472453: 
+epoch:  108 
+2025-11-16 18:04:41.425262: train loss : -0.7175 
+2025-11-16 18:04:58.864656: validation loss: -0.4333 
+2025-11-16 18:04:58.868022: Average global foreground Dice: [0.9332, 0.0483] 
+2025-11-16 18:04:58.870009: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:04:59.450370: lr: 0.003112 
+2025-11-16 18:04:59.453224: [W&B] Logged epoch 108 to WandB 
+2025-11-16 18:04:59.454587: [W&B] Epoch 108, continue_training=True, max_epochs=150 
+2025-11-16 18:04:59.455918: This epoch took 291.981551 s
+ 
+2025-11-16 18:04:59.457222: 
+epoch:  109 
+2025-11-16 18:09:33.651605: train loss : -0.7225 
+2025-11-16 18:09:51.074186: validation loss: -0.3726 
+2025-11-16 18:09:51.077060: Average global foreground Dice: [0.9256, 0.0487] 
+2025-11-16 18:09:51.079021: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:09:51.949878: lr: 0.003043 
+2025-11-16 18:09:51.954613: [W&B] Logged epoch 109 to WandB 
+2025-11-16 18:09:51.956046: [W&B] Epoch 109, continue_training=True, max_epochs=150 
+2025-11-16 18:09:51.957370: This epoch took 292.498480 s
+ 
+2025-11-16 18:09:51.958587: 
+epoch:  110 
+2025-11-16 18:14:25.762563: train loss : -0.7349 
+2025-11-16 18:14:43.200505: validation loss: -0.5034 
+2025-11-16 18:14:43.203270: Average global foreground Dice: [0.9387, 0.0953] 
+2025-11-16 18:14:43.205170: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:14:44.185699: lr: 0.002975 
+2025-11-16 18:14:44.188436: [W&B] Logged epoch 110 to WandB 
+2025-11-16 18:14:44.189818: [W&B] Epoch 110, continue_training=True, max_epochs=150 
+2025-11-16 18:14:44.191051: This epoch took 292.230713 s
+ 
+2025-11-16 18:14:44.192904: 
+epoch:  111 
+2025-11-16 18:19:18.498716: train loss : -0.7406 
+2025-11-16 18:19:35.921085: validation loss: -0.5225 
+2025-11-16 18:19:35.923672: Average global foreground Dice: [0.9501, 0.0589] 
+2025-11-16 18:19:35.925692: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:19:36.812135: lr: 0.002906 
+2025-11-16 18:19:36.815216: [W&B] Logged epoch 111 to WandB 
+2025-11-16 18:19:36.816769: [W&B] Epoch 111, continue_training=True, max_epochs=150 
+2025-11-16 18:19:36.818017: This epoch took 292.623280 s
+ 
+2025-11-16 18:19:36.819257: 
+epoch:  112 
+2025-11-16 18:24:10.736713: train loss : -0.7388 
+2025-11-16 18:24:28.163638: validation loss: -0.5296 
+2025-11-16 18:24:28.166683: Average global foreground Dice: [0.952, 0.0658] 
+2025-11-16 18:24:28.168903: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:24:28.820813: lr: 0.002837 
+2025-11-16 18:24:28.823535: [W&B] Logged epoch 112 to WandB 
+2025-11-16 18:24:28.824796: [W&B] Epoch 112, continue_training=True, max_epochs=150 
+2025-11-16 18:24:28.826252: This epoch took 292.004932 s
+ 
+2025-11-16 18:24:28.827537: 
+epoch:  113 
+2025-11-16 18:29:03.285511: train loss : -0.7169 
+2025-11-16 18:29:20.758670: validation loss: -0.4617 
+2025-11-16 18:29:20.761996: Average global foreground Dice: [0.9283, 0.0329] 
+2025-11-16 18:29:20.763900: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:29:21.641380: lr: 0.002768 
+2025-11-16 18:29:21.644078: [W&B] Logged epoch 113 to WandB 
+2025-11-16 18:29:21.645366: [W&B] Epoch 113, continue_training=True, max_epochs=150 
+2025-11-16 18:29:21.646614: This epoch took 292.817380 s
+ 
+2025-11-16 18:29:21.647737: 
+epoch:  114 
+2025-11-16 18:33:56.030720: train loss : -0.7541 
+2025-11-16 18:34:13.495165: validation loss: -0.4211 
+2025-11-16 18:34:13.501427: Average global foreground Dice: [0.9301, 0.0651] 
+2025-11-16 18:34:13.503447: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:34:14.143273: lr: 0.002699 
+2025-11-16 18:34:14.146661: [W&B] Logged epoch 114 to WandB 
+2025-11-16 18:34:14.148088: [W&B] Epoch 114, continue_training=True, max_epochs=150 
+2025-11-16 18:34:14.149508: This epoch took 292.499734 s
+ 
+2025-11-16 18:34:14.150885: 
+epoch:  115 
+2025-11-16 18:38:53.689409: train loss : -0.7372 
+2025-11-16 18:39:11.129310: validation loss: -0.5060 
+2025-11-16 18:39:11.132438: Average global foreground Dice: [0.9419, 0.0816] 
+2025-11-16 18:39:11.134367: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:39:12.024149: lr: 0.002629 
+2025-11-16 18:39:12.027486: [W&B] Logged epoch 115 to WandB 
+2025-11-16 18:39:12.028756: [W&B] Epoch 115, continue_training=True, max_epochs=150 
+2025-11-16 18:39:12.029930: This epoch took 297.877373 s
+ 
+2025-11-16 18:39:12.031159: 
+epoch:  116 
+2025-11-16 18:43:45.805912: train loss : -0.7428 
+2025-11-16 18:44:03.260073: validation loss: -0.4955 
+2025-11-16 18:44:03.262972: Average global foreground Dice: [0.9299, 0.0473] 
+2025-11-16 18:44:03.264978: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:44:04.244848: lr: 0.00256 
+2025-11-16 18:44:04.249961: [W&B] Logged epoch 116 to WandB 
+2025-11-16 18:44:04.251786: [W&B] Epoch 116, continue_training=True, max_epochs=150 
+2025-11-16 18:44:04.253174: This epoch took 292.220023 s
+ 
+2025-11-16 18:44:04.254555: 
+epoch:  117 
+2025-11-16 18:48:38.039378: train loss : -0.7139 
+2025-11-16 18:48:55.488030: validation loss: -0.4663 
+2025-11-16 18:48:55.490427: Average global foreground Dice: [0.938, 0.0804] 
+2025-11-16 18:48:55.492265: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:48:56.073666: lr: 0.00249 
+2025-11-16 18:48:56.076808: [W&B] Logged epoch 117 to WandB 
+2025-11-16 18:48:56.078087: [W&B] Epoch 117, continue_training=True, max_epochs=150 
+2025-11-16 18:48:56.079257: This epoch took 291.822750 s
+ 
+2025-11-16 18:48:56.080598: 
+epoch:  118 
+2025-11-16 18:53:29.565481: train loss : -0.7183 
+2025-11-16 18:53:47.007318: validation loss: -0.4795 
+2025-11-16 18:53:47.010774: Average global foreground Dice: [0.9206, 0.0662] 
+2025-11-16 18:53:47.013118: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:53:47.925050: lr: 0.00242 
+2025-11-16 18:53:47.928080: [W&B] Logged epoch 118 to WandB 
+2025-11-16 18:53:47.929443: [W&B] Epoch 118, continue_training=True, max_epochs=150 
+2025-11-16 18:53:47.930882: This epoch took 291.848540 s
+ 
+2025-11-16 18:53:47.932108: 
+epoch:  119 
+2025-11-16 18:58:21.762354: train loss : -0.7566 
+2025-11-16 18:58:39.205277: validation loss: -0.4853 
+2025-11-16 18:58:39.208035: Average global foreground Dice: [0.9348, 0.066] 
+2025-11-16 18:58:39.210267: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 18:58:39.835225: lr: 0.002349 
+2025-11-16 18:58:39.838125: [W&B] Logged epoch 119 to WandB 
+2025-11-16 18:58:39.839472: [W&B] Epoch 119, continue_training=True, max_epochs=150 
+2025-11-16 18:58:39.841060: This epoch took 291.907289 s
+ 
+2025-11-16 18:58:39.842450: 
+epoch:  120 
+2025-11-16 19:03:13.377580: train loss : -0.7520 
+2025-11-16 19:03:30.822541: validation loss: -0.5109 
+2025-11-16 19:03:30.825866: Average global foreground Dice: [0.9218, 0.0543] 
+2025-11-16 19:03:30.828047: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:03:31.723878: lr: 0.002279 
+2025-11-16 19:03:31.727550: [W&B] Logged epoch 120 to WandB 
+2025-11-16 19:03:31.728912: [W&B] Epoch 120, continue_training=True, max_epochs=150 
+2025-11-16 19:03:31.733075: This epoch took 291.888887 s
+ 
+2025-11-16 19:03:31.734474: 
+epoch:  121 
+2025-11-16 19:08:05.574358: train loss : -0.7234 
+2025-11-16 19:08:23.039759: validation loss: -0.4434 
+2025-11-16 19:08:23.043097: Average global foreground Dice: [0.9326, 0.0595] 
+2025-11-16 19:08:23.045291: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:08:24.020528: lr: 0.002208 
+2025-11-16 19:08:24.023173: [W&B] Logged epoch 121 to WandB 
+2025-11-16 19:08:24.024553: [W&B] Epoch 121, continue_training=True, max_epochs=150 
+2025-11-16 19:08:24.025845: This epoch took 292.289418 s
+ 
+2025-11-16 19:08:24.027093: 
+epoch:  122 
+2025-11-16 19:12:57.634346: train loss : -0.7359 
+2025-11-16 19:13:15.107760: validation loss: -0.5007 
+2025-11-16 19:13:15.109691: Average global foreground Dice: [0.935, 0.0828] 
+2025-11-16 19:13:15.111386: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:13:16.096304: lr: 0.002137 
+2025-11-16 19:13:16.098963: [W&B] Logged epoch 122 to WandB 
+2025-11-16 19:13:16.100343: [W&B] Epoch 122, continue_training=True, max_epochs=150 
+2025-11-16 19:13:16.101628: This epoch took 292.072907 s
+ 
+2025-11-16 19:13:16.102813: 
+epoch:  123 
+2025-11-16 19:17:50.155038: train loss : -0.7589 
+2025-11-16 19:18:07.603213: validation loss: -0.5045 
+2025-11-16 19:18:07.606445: Average global foreground Dice: [0.9317, 0.0672] 
+2025-11-16 19:18:07.608469: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:18:08.532767: lr: 0.002065 
+2025-11-16 19:18:08.536118: [W&B] Logged epoch 123 to WandB 
+2025-11-16 19:18:08.537451: [W&B] Epoch 123, continue_training=True, max_epochs=150 
+2025-11-16 19:18:08.538720: This epoch took 292.434084 s
+ 
+2025-11-16 19:18:08.539979: 
+epoch:  124 
+2025-11-16 19:22:42.308577: train loss : -0.7545 
+2025-11-16 19:22:59.751176: validation loss: -0.3657 
+2025-11-16 19:22:59.756497: Average global foreground Dice: [0.9186, 0.071] 
+2025-11-16 19:22:59.759086: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:23:00.409745: lr: 0.001994 
+2025-11-16 19:23:00.412457: [W&B] Logged epoch 124 to WandB 
+2025-11-16 19:23:00.413652: [W&B] Epoch 124, continue_training=True, max_epochs=150 
+2025-11-16 19:23:00.414756: This epoch took 291.873128 s
+ 
+2025-11-16 19:23:00.415834: 
+epoch:  125 
+2025-11-16 19:27:38.942602: train loss : -0.7407 
+2025-11-16 19:27:56.368937: validation loss: -0.5015 
+2025-11-16 19:27:56.371919: Average global foreground Dice: [0.934, 0.0446] 
+2025-11-16 19:27:56.374061: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:27:57.237714: lr: 0.001922 
+2025-11-16 19:27:57.240616: [W&B] Logged epoch 125 to WandB 
+2025-11-16 19:27:57.241911: [W&B] Epoch 125, continue_training=True, max_epochs=150 
+2025-11-16 19:27:57.243184: This epoch took 296.825657 s
+ 
+2025-11-16 19:27:57.244457: 
+epoch:  126 
+2025-11-16 19:32:31.018186: train loss : -0.7310 
+2025-11-16 19:32:48.455499: validation loss: -0.4642 
+2025-11-16 19:32:48.458183: Average global foreground Dice: [0.936, 0.034] 
+2025-11-16 19:32:48.461092: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:32:49.133354: lr: 0.00185 
+2025-11-16 19:32:49.136049: [W&B] Logged epoch 126 to WandB 
+2025-11-16 19:32:49.137201: [W&B] Epoch 126, continue_training=True, max_epochs=150 
+2025-11-16 19:32:49.138467: This epoch took 291.892183 s
+ 
+2025-11-16 19:32:49.139612: 
+epoch:  127 
+2025-11-16 19:37:23.383550: train loss : -0.7414 
+2025-11-16 19:37:40.837936: validation loss: -0.4439 
+2025-11-16 19:37:40.839777: Average global foreground Dice: [0.9362, 0.0771] 
+2025-11-16 19:37:40.841468: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:37:41.756859: lr: 0.001777 
+2025-11-16 19:37:41.759921: [W&B] Logged epoch 127 to WandB 
+2025-11-16 19:37:41.761207: [W&B] Epoch 127, continue_training=True, max_epochs=150 
+2025-11-16 19:37:41.762606: This epoch took 292.621369 s
+ 
+2025-11-16 19:37:41.763954: 
+epoch:  128 
+2025-11-16 19:42:15.681504: train loss : -0.7479 
+2025-11-16 19:42:33.124886: validation loss: -0.4684 
+2025-11-16 19:42:33.127748: Average global foreground Dice: [0.9452, 0.0479] 
+2025-11-16 19:42:33.129802: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:42:34.139165: lr: 0.001704 
+2025-11-16 19:42:34.150422: [W&B] Logged epoch 128 to WandB 
+2025-11-16 19:42:34.151588: [W&B] Epoch 128, continue_training=True, max_epochs=150 
+2025-11-16 19:42:34.153423: This epoch took 292.387697 s
+ 
+2025-11-16 19:42:34.155436: 
+epoch:  129 
+2025-11-16 19:47:08.726488: train loss : -0.7548 
+2025-11-16 19:47:26.168450: validation loss: -0.3993 
+2025-11-16 19:47:26.171375: Average global foreground Dice: [0.9113, 0.0243] 
+2025-11-16 19:47:26.173457: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:47:27.041508: lr: 0.001631 
+2025-11-16 19:47:27.044175: [W&B] Logged epoch 129 to WandB 
+2025-11-16 19:47:27.045577: [W&B] Epoch 129, continue_training=True, max_epochs=150 
+2025-11-16 19:47:27.046857: This epoch took 292.888226 s
+ 
+2025-11-16 19:47:27.048189: 
+epoch:  130 
+2025-11-16 19:52:00.801390: train loss : -0.7638 
+2025-11-16 19:52:18.259280: validation loss: -0.2985 
+2025-11-16 19:52:18.262516: Average global foreground Dice: [0.897, 0.0287] 
+2025-11-16 19:52:18.264560: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:52:18.934692: lr: 0.001557 
+2025-11-16 19:52:18.937200: [W&B] Logged epoch 130 to WandB 
+2025-11-16 19:52:18.938346: [W&B] Epoch 130, continue_training=True, max_epochs=150 
+2025-11-16 19:52:18.939490: This epoch took 291.889622 s
+ 
+2025-11-16 19:52:18.940601: 
+epoch:  131 
+2025-11-16 19:56:53.217660: train loss : -0.7690 
+2025-11-16 19:57:10.715071: validation loss: -0.3919 
+2025-11-16 19:57:10.718195: Average global foreground Dice: [0.909, 0.0397] 
+2025-11-16 19:57:10.720516: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 19:57:11.628913: lr: 0.001483 
+2025-11-16 19:57:11.632299: [W&B] Logged epoch 131 to WandB 
+2025-11-16 19:57:11.633561: [W&B] Epoch 131, continue_training=True, max_epochs=150 
+2025-11-16 19:57:11.635078: This epoch took 292.692522 s
+ 
+2025-11-16 19:57:11.636350: 
+epoch:  132 
+2025-11-16 20:01:45.651898: train loss : -0.7678 
+2025-11-16 20:02:03.129907: validation loss: -0.4147 
+2025-11-16 20:02:03.132800: Average global foreground Dice: [0.9082, 0.0442] 
+2025-11-16 20:02:03.134880: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:02:04.137365: lr: 0.001409 
+2025-11-16 20:02:04.150111: [W&B] Logged epoch 132 to WandB 
+2025-11-16 20:02:04.155776: [W&B] Epoch 132, continue_training=True, max_epochs=150 
+2025-11-16 20:02:04.158879: This epoch took 292.520838 s
+ 
+2025-11-16 20:02:04.161260: 
+epoch:  133 
+2025-11-16 20:06:38.205315: train loss : -0.7566 
+2025-11-16 20:06:55.647570: validation loss: -0.4439 
+2025-11-16 20:06:55.650262: Average global foreground Dice: [0.9423, 0.0568] 
+2025-11-16 20:06:55.652294: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:06:56.549414: lr: 0.001334 
+2025-11-16 20:06:56.552264: [W&B] Logged epoch 133 to WandB 
+2025-11-16 20:06:56.553726: [W&B] Epoch 133, continue_training=True, max_epochs=150 
+2025-11-16 20:06:56.555029: This epoch took 292.391316 s
+ 
+2025-11-16 20:06:56.556507: 
+epoch:  134 
+2025-11-16 20:11:30.567895: train loss : -0.7504 
+2025-11-16 20:11:48.036684: validation loss: -0.4356 
+2025-11-16 20:11:48.039564: Average global foreground Dice: [0.929, 0.0404] 
+2025-11-16 20:11:48.041337: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:11:53.738152: lr: 0.001259 
+2025-11-16 20:11:53.740837: [W&B] Logged epoch 134 to WandB 
+2025-11-16 20:11:53.742053: [W&B] Epoch 134, continue_training=True, max_epochs=150 
+2025-11-16 20:11:53.743247: This epoch took 297.184887 s
+ 
+2025-11-16 20:11:53.744301: 
+epoch:  135 
+2025-11-16 20:16:27.923351: train loss : -0.7696 
+2025-11-16 20:16:45.356777: validation loss: -0.5542 
+2025-11-16 20:16:45.359766: Average global foreground Dice: [0.9496, 0.0695] 
+2025-11-16 20:16:45.361818: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:16:46.236347: lr: 0.001183 
+2025-11-16 20:16:46.239647: [W&B] Logged epoch 135 to WandB 
+2025-11-16 20:16:46.241076: [W&B] Epoch 135, continue_training=True, max_epochs=150 
+2025-11-16 20:16:46.242476: This epoch took 292.494712 s
+ 
+2025-11-16 20:16:46.243778: 
+epoch:  136 
+2025-11-16 20:21:20.201218: train loss : -0.7570 
+2025-11-16 20:21:37.651410: validation loss: -0.5053 
+2025-11-16 20:21:37.654607: Average global foreground Dice: [0.9246, 0.1106] 
+2025-11-16 20:21:37.656365: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:21:38.581842: lr: 0.001107 
+2025-11-16 20:21:38.584252: [W&B] Logged epoch 136 to WandB 
+2025-11-16 20:21:38.585382: [W&B] Epoch 136, continue_training=True, max_epochs=150 
+2025-11-16 20:21:38.586443: This epoch took 292.341061 s
+ 
+2025-11-16 20:21:38.587650: 
+epoch:  137 
+2025-11-16 20:26:12.659914: train loss : -0.7582 
+2025-11-16 20:26:31.062346: validation loss: -0.4785 
+2025-11-16 20:26:31.064728: Average global foreground Dice: [0.9347, 0.0507] 
+2025-11-16 20:26:31.066988: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:26:31.991950: lr: 0.00103 
+2025-11-16 20:26:31.994948: [W&B] Logged epoch 137 to WandB 
+2025-11-16 20:26:31.996428: [W&B] Epoch 137, continue_training=True, max_epochs=150 
+2025-11-16 20:26:31.997668: This epoch took 293.408089 s
+ 
+2025-11-16 20:26:31.998911: 
+epoch:  138 
+2025-11-16 20:31:05.806646: train loss : -0.7517 
+2025-11-16 20:31:23.251134: validation loss: -0.4402 
+2025-11-16 20:31:23.254964: Average global foreground Dice: [0.9273, 0.0533] 
+2025-11-16 20:31:23.257260: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:31:24.282051: lr: 0.000952 
+2025-11-16 20:31:24.348263: [W&B] Logged epoch 138 to WandB 
+2025-11-16 20:31:24.349506: [W&B] Epoch 138, continue_training=True, max_epochs=150 
+2025-11-16 20:31:24.351612: This epoch took 292.350839 s
+ 
+2025-11-16 20:31:24.354780: 
+epoch:  139 
+2025-11-16 20:35:58.420398: train loss : -0.7454 
+2025-11-16 20:36:15.883919: validation loss: -0.5224 
+2025-11-16 20:36:15.887109: Average global foreground Dice: [0.9428, 0.0693] 
+2025-11-16 20:36:15.889723: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:36:16.796336: lr: 0.000874 
+2025-11-16 20:36:16.799244: [W&B] Logged epoch 139 to WandB 
+2025-11-16 20:36:16.800888: [W&B] Epoch 139, continue_training=True, max_epochs=150 
+2025-11-16 20:36:16.802357: This epoch took 292.444351 s
+ 
+2025-11-16 20:36:16.803689: 
+epoch:  140 
+2025-11-16 20:40:50.862527: train loss : -0.7595 
+2025-11-16 20:41:08.300031: validation loss: -0.4481 
+2025-11-16 20:41:08.304078: Average global foreground Dice: [0.9173, 0.0984] 
+2025-11-16 20:41:08.307339: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:41:09.310951: lr: 0.000795 
+2025-11-16 20:41:09.353739: [W&B] Logged epoch 140 to WandB 
+2025-11-16 20:41:09.356186: [W&B] Epoch 140, continue_training=True, max_epochs=150 
+2025-11-16 20:41:09.359194: This epoch took 292.553383 s
+ 
+2025-11-16 20:41:09.360836: 
+epoch:  141 
+2025-11-16 20:45:43.791075: train loss : -0.7657 
+2025-11-16 20:46:01.227300: validation loss: -0.5146 
+2025-11-16 20:46:01.230437: Average global foreground Dice: [0.9303, 0.0674] 
+2025-11-16 20:46:01.232535: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:46:02.190965: lr: 0.000715 
+2025-11-16 20:46:02.194496: [W&B] Logged epoch 141 to WandB 
+2025-11-16 20:46:02.195843: [W&B] Epoch 141, continue_training=True, max_epochs=150 
+2025-11-16 20:46:02.197206: This epoch took 292.833889 s
+ 
+2025-11-16 20:46:02.198529: 
+epoch:  142 
+2025-11-16 20:50:36.241747: train loss : -0.7516 
+2025-11-16 20:50:53.716276: validation loss: -0.4837 
+2025-11-16 20:50:53.718392: Average global foreground Dice: [0.9183, 0.0328] 
+2025-11-16 20:50:53.719991: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:50:54.449354: lr: 0.000634 
+2025-11-16 20:50:54.453668: [W&B] Logged epoch 142 to WandB 
+2025-11-16 20:50:54.455677: [W&B] Epoch 142, continue_training=True, max_epochs=150 
+2025-11-16 20:50:54.458340: This epoch took 292.258147 s
+ 
+2025-11-16 20:50:54.461485: 
+epoch:  143 
+2025-11-16 20:55:28.825377: train loss : -0.7577 
+2025-11-16 20:55:46.274968: validation loss: -0.4398 
+2025-11-16 20:55:46.277724: Average global foreground Dice: [0.9059, 0.0391] 
+2025-11-16 20:55:46.279613: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 20:55:46.920126: lr: 0.000552 
+2025-11-16 20:55:46.922990: [W&B] Logged epoch 143 to WandB 
+2025-11-16 20:55:46.924285: [W&B] Epoch 143, continue_training=True, max_epochs=150 
+2025-11-16 20:55:46.925497: This epoch took 292.459936 s
+ 
+2025-11-16 20:55:46.926777: 
+epoch:  144 
+2025-11-16 21:00:25.678262: train loss : -0.7683 
+2025-11-16 21:00:43.087203: validation loss: -0.5221 
+2025-11-16 21:00:43.089944: Average global foreground Dice: [0.9378, 0.097] 
+2025-11-16 21:00:43.091940: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 21:00:44.057808: lr: 0.000468 
+2025-11-16 21:00:44.061742: [W&B] Logged epoch 144 to WandB 
+2025-11-16 21:00:44.063493: [W&B] Epoch 144, continue_training=True, max_epochs=150 
+2025-11-16 21:00:44.065286: This epoch took 297.136697 s
+ 
+2025-11-16 21:00:44.066817: 
+epoch:  145 
+2025-11-16 21:05:18.291417: train loss : -0.7643 
+2025-11-16 21:05:35.762381: validation loss: -0.5058 
+2025-11-16 21:05:35.768439: Average global foreground Dice: [0.9431, 0.0851] 
+2025-11-16 21:05:35.772261: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 21:05:36.663701: lr: 0.000383 
+2025-11-16 21:05:36.666981: [W&B] Logged epoch 145 to WandB 
+2025-11-16 21:05:36.668369: [W&B] Epoch 145, continue_training=True, max_epochs=150 
+2025-11-16 21:05:36.669596: This epoch took 292.600746 s
+ 
+2025-11-16 21:05:36.670794: 
+epoch:  146 
+2025-11-16 21:10:10.454560: train loss : -0.7540 
+2025-11-16 21:10:27.916844: validation loss: -0.4317 
+2025-11-16 21:10:27.919495: Average global foreground Dice: [0.9369, 0.075] 
+2025-11-16 21:10:27.921283: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 21:10:28.916154: lr: 0.000296 
+2025-11-16 21:10:28.919008: [W&B] Logged epoch 146 to WandB 
+2025-11-16 21:10:28.948726: [W&B] Epoch 146, continue_training=True, max_epochs=150 
+2025-11-16 21:10:28.950502: This epoch took 292.278031 s
+ 
+2025-11-16 21:10:28.951992: 
+epoch:  147 
+2025-11-16 21:15:03.233560: train loss : -0.7557 
+2025-11-16 21:15:20.692954: validation loss: -0.4823 
+2025-11-16 21:15:20.695754: Average global foreground Dice: [0.9233, 0.0666] 
+2025-11-16 21:15:20.697606: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 21:15:21.581508: lr: 0.000205 
+2025-11-16 21:15:21.584481: [W&B] Logged epoch 147 to WandB 
+2025-11-16 21:15:21.585736: [W&B] Epoch 147, continue_training=True, max_epochs=150 
+2025-11-16 21:15:21.587138: This epoch took 292.632592 s
+ 
+2025-11-16 21:15:21.588359: 
+epoch:  148 
+2025-11-16 21:19:55.466456: train loss : -0.7722 
+2025-11-16 21:20:12.911000: validation loss: -0.4545 
+2025-11-16 21:20:12.913809: Average global foreground Dice: [0.9303, 0.0543] 
+2025-11-16 21:20:12.915718: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 21:20:13.900428: lr: 0.00011 
+2025-11-16 21:20:13.903089: [W&B] Logged epoch 148 to WandB 
+2025-11-16 21:20:13.904262: [W&B] Epoch 148, continue_training=True, max_epochs=150 
+2025-11-16 21:20:13.905565: This epoch took 292.315311 s
+ 
+2025-11-16 21:20:13.906776: 
+epoch:  149 
+2025-11-16 21:24:47.920348: train loss : -0.7534 
+2025-11-16 21:25:05.353824: validation loss: -0.4249 
+2025-11-16 21:25:05.356963: Average global foreground Dice: [0.9218, 0.0434] 
+2025-11-16 21:25:05.360208: (interpret this as an estimate for the Dice of the different classes. This is not exact.) 
+2025-11-16 21:25:06.331926: lr: 0.0 
+2025-11-16 21:25:06.334415: saving scheduled checkpoint file... 
+2025-11-16 21:25:06.647664: saving checkpoint... 
+2025-11-16 21:25:06.843988: done, saving took 0.51 seconds 
+2025-11-16 21:25:06.998808: done 
+2025-11-16 21:25:07.002080: [W&B] Logged epoch 149 to WandB 
+2025-11-16 21:25:07.003681: [W&B] Epoch 149, continue_training=True, max_epochs=150 
+2025-11-16 21:25:07.005939: This epoch took 293.097527 s
+ 
+2025-11-16 21:25:07.296819: saving checkpoint... 
+2025-11-16 21:25:07.439521: done, saving took 0.43 seconds 

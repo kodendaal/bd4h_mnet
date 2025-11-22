@@ -1,0 +1,8 @@
+Starting... 
+2025-11-22 18:06:31.833372: Training config: max_epochs=1, gated_fusion=spatial 
+2025-11-22 18:06:32.101575: Model params: total=7,465,024, trainable=7,465,024 
+2025-11-22 18:06:33.481077: [WARN] Parameter count decreased -14.87% vs baseline (8.769M). 
+2025-11-22 18:06:34.142696: loading checkpoint /teamspace/studios/this_studio/nnUNet_results/nnUNet/3d_fullres/Task029_LITS/myTrainer_reproduction_WandB__nnUNetData_plans_v2.1_trgSp_z2p2_yx0p9121_vmamba/fold_0/model_best.model train= False 
+2025-11-22 18:23:50.772789: finished prediction 
+2025-11-22 18:23:50.774833: evaluation of raw predictions 
+2025-11-22 18:24:02.724863: determining postprocessing 
